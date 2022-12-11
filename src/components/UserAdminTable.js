@@ -22,7 +22,7 @@ const UserAdminTable = ({ users, onEdit, onDelete }) => {
             <td>{user.expiredate}</td>
             <td>{user.role}</td>
             <td>
-              <button onClick={() => onEdit(user.id)}>Edit</button>
+              <button onClick={() => onEdit(user.id)}>Edite</button>
               <button onClick={() => onDelete(user.id)}>Delete</button>
             </td>
           </tr>
