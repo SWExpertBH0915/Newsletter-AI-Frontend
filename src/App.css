@@ -1,0 +1,263 @@
+.App {
+  text-align: center;
+}
+
+.header,
+.contents,
+.footer,
+.header-action button,
+.contents-demo a,
+.header-nav a {
+  background-color: rgb(14, 14, 14);
+  color: azure;
+}
+
+.header {
+  margin-top: 50;
+  padding: 0px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-nav {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.header-nav a {
+  display: block;
+  align-self: center;
+  font-size: large;
+  justify-self: center;
+  text-decoration: none;
+}
+
+.header-title {
+  /* width: 100%; */
+  font-size: x-large;
+}
+
+.header-action {
+  display: flex;
+  /* width: 100%; */
+  align-self: center;
+}
+
+.header-action button {
+  background-color: blueviolet;
+  padding: 20px;
+  border-radius: 30px;
+  border: none;
+  font-size: large;
+}
+
+.contents {
+  display: inline-block;
+  width: 100%;
+}
+
+.typeit {
+  font-size: 96px;
+  font-family: "Proxima Nova";
+  font-weight: bold;
+  margin-top: 100px;
+}
+
+.contents a {
+  display: inline-flex;
+  background-color: blueviolet;
+  padding: 20px;
+  border-radius: 30px;
+  border: none;
+  font-size: large;
+  text-decoration: none;
+  margin: 20px;
+  margin-top: 20px;
+  width: 150px;
+  justify-content: center;
+}
+
+.contents-discription {
+  display: block;
+  padding-top: 30px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.contents-discription h1 {
+  font-size: 60px;
+}
+
+.contents-items {
+  display: inline-flex;
+  width: 100%;
+  margin: 20px, 20px;
+}
+
+.contents-item {
+  display: block;
+  width: 100%;
+  margin: 40px;
+}
+
+.contents-item p {
+  margin: 40px;
+
+}
+
+.footer h3 {
+  display: inline-block;
+  font-size: 20px;
+}
+
+.mainscreen-header {
+  font-size: 60px;
+  background-color: rgb(55, 52, 52);
+  color: aliceblue;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
+
+.input-items {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(31, 28, 28);
+}
+
+.input-url-prompt {
+  width: 80%;
+  margin-top: 20px;
+}
+
+.input-url-prompt > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.input-url-prompt textarea {
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 900px;
+  padding-right: 15px;
+  font-size: 15px;
+  background-color: rgb(53, 53, 47);
+  color:aliceblue
+}
+
+.input-url-prompt label {
+  color:aliceblue;
+  padding-left: 10rem;
+  font-size: 20px;
+}
+
+.input-btn {
+  display: inline-flex;
+  width: 20%;
+  align-items: center;
+  margin-left: 80px;
+}
+
+.btn-submit {
+  width: 180px;
+  height: 50px;
+  border-radius: 30px;
+  border: none;
+  font-size: 25px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: solid;
+  background-color: rgb(163, 231, 37);
+}
+
+.btn-submit:hover {
+  width: 185px;
+  height: 55px;
+  border-radius: 30px;
+  border: none;
+  font-size: 25px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: solid;
+  background-color: rgb(127, 247, 29);
+}
+
+.result {
+  min-height: 700px;
+  background-color: rgb(56, 53, 53);
+}
+
+.result-main {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  background-color: rgb(56, 53, 53);
+  color: aliceblue;
+}
+
+.result-main > div {
+  display: flex;
+  width: 1050px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  padding-right: 1rem;
+}
+
+.result-main label {
+  font-size: 25px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: solid;
+}
+
+.result-main textarea {
+  width: 900px;
+  font-size: 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  background-color: rgb(46, 45, 45);
+  color: aliceblue;
+}
+
+.result-image img {
+  max-width: 750px;
+  max-height: 600px;
+}
+
+.result-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-left: 160px;
+  /* margin-right: 445px; */
+  margin-right: 23%;
+}
+
+.result-total label {
+  color: aliceblue;
+  font-size: 20px;
+}
+
+.result-total textarea {
+  width: 900px;
+  font-size: 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  background-color: rgb(46, 45, 45);
+  color: aliceblue;
+}
+
+.process-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: rgb(46, 45, 45);
+}
