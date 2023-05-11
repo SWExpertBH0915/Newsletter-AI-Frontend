@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import blankimg from "../img/blank.png";
 import axios from "axios";
-import env from "react-dotenv";
+// import env from "react-dotenv";
 
 import LoadingButton from "./LoadingButton";
 
@@ -19,7 +19,7 @@ export default function MainScreen() {
 
   const [loading, setLoading] = useState(false);
 
-  const baseURL = env.BASE_URL;
+  const baseURL = process.env.BASE_URL;
 
   const isUrl = (str) => {
     const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
