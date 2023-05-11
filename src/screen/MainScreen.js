@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import blankimg from "../img/blank.png";
 import axios from "axios";
-// import env from "react-dotenv";
 
 import LoadingButton from "./LoadingButton";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-
-// dotenv.config();
 
 export default function MainScreen() {
   const [newsurl, setNewsurl] = useState("");
