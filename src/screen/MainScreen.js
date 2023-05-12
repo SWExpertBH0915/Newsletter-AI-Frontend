@@ -16,7 +16,7 @@ export default function MainScreen() {
 
   const [loading, setLoading] = useState(false);
 
-  const baseURL = process.env.BASE_URL;
+  const baseURL = process.env.REACT_APP_BASEURL;
 
   const isUrl = (str) => {
     const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -53,7 +53,6 @@ export default function MainScreen() {
         setData(res.data.result);
         setTotalsum(res.data.totalreulst);
         setLoading(false);
-        console.log(res.data.result);
       } else {
         alert("Invalid URL");
       }
