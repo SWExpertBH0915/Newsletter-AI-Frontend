@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .header,
 .contents,
@@ -114,10 +114,10 @@
 }
 
 .mainscreen-header {
-  font-size: 60px;
-  background-color: rgb(55, 52, 52);
+  font-size: 80px;
+  background-color: rgb(4, 56, 70);
   color: aliceblue;
-  padding-top: 3rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
@@ -236,7 +236,6 @@
   justify-content: space-between;
   padding-top: 10px;
   margin-left: 160px;
-  /* margin-right: 445px; */
   margin-right: 23%;
 }
 
