@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import blankimg from "../img/blank.png";
 import axios from "axios";
 
-import LoadingButton from "./LoadingButton";
-
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
@@ -79,15 +77,14 @@ export default function MainScreen() {
 
   return (
     <div>
-      <header className="mainscreen-header" style={{ textAlign: "center" }}>
-        Newsletter AI
-      </header>
+      <header className="mainscreen-header">NEWSLETTER AI</header>
       <body
         style={{
           paddingLeft: "5%",
           paddingRight: "10%",
           backgroundColor: "#1f2423",
           paddingBottom: "2rem",
+          minHeight: "90vh"
         }}
       >
         <Form className="mb-4">
@@ -103,6 +100,7 @@ export default function MainScreen() {
             <Col sm={9}>
               <Form.Control
                 className="fs-6 bg-body"
+                co
                 as="textarea"
                 rows={5}
                 onChange={(e) => {
@@ -266,67 +264,10 @@ export default function MainScreen() {
             </div>
           </div>
         )}
-
-        {/* <div className="input-items">
-          <div className="input-url-prompt">
-            <div>
-              <label>Please input Newsletter URL</label>
-              <textarea
-                rows={6}
-                onChange={(e) => {
-                  handleOnChange(e);
-                }}
-              />
-            </div>
-            <div>
-              <label>Please input Prompt</label>
-              <textarea
-                onChange={(e) => {
-                  handleOnChangeProm(e);
-                }}
-              />
-            </div>
-          </div>
-          <div className="input-btn">
-            <LoadingButton onClick={handleOnClick}>Submit</LoadingButton>
-          </div>
-        </div> */}
-        {/* {loading ? (
-          <div className="process-bar">
-            <Box sx={{ display: "flex" }}>
-              <CircularProgress size={100} />
-            </Box>
-          </div>
-        ) : (
-          <div className="result">
-            {data.map((item, index) => (
-              <div className="result-main" key={index}>
-                <div className="result-url">
-                  <label>URL</label>
-                  <textarea value={item.url} readOnly />
-                </div>
-                <div>
-                  <label>Headline</label>
-                  <textarea value={item.headline} readOnly />
-                </div>
-                <div>
-                  <label>Content</label>
-                  <textarea rows={15} value={item.content.trim()} readOnly />
-                </div>
-                <div className="result-image">
-                  <label>Image</label>
-                  <img src={item.imgurl} alt={blankimg} />
-                </div>
-              </div>
-            ))}
-            <div className="result-total">
-              <label>Total Summarize</label>
-              <textarea rows={10} value={totalsum.trim()} readOnly />
-            </div>
-          </div>
-        )} */}
       </body>
-      <footer>Reserved by LEO</footer>
+      <footer className="text-center text-white bg-black">
+        RESERVED BY LEO
+      </footer>
     </div>
   );
 }
