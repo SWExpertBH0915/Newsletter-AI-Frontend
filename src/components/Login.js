@@ -14,19 +14,10 @@ export default function Login() {
     e.preventDefault();
     console.log(email);
   };
-
-  const styles = {
-    [`@media (min-width: 300px)`]: {
-      width: "100vh"
-    }
-  };
   return (
-    <div
-      className="border border-black p-4 shadow position-absolute top-50 start-50 translate-middle"
-      style={styles}
-    >
-      <h2 className="mb-4 text-center">Log In</h2>
-      <Form>
+    <div className="border border-black bg-black text-white p-4 shadow d-flex text-center min-vh-100 align-items-center justify-content-center">
+      {/* <h2 className="mb-4 text-center">Log In</h2> */}
+      <Form className="login-formMedia">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />

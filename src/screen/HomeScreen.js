@@ -33,7 +33,7 @@ export default function HomeScreen() {
               navigate("/login");
             }}
           >
-            GET START
+            GET STARTED
           </button>
         </div>
       </div>

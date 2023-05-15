@@ -4,11 +4,17 @@
   text-align: center;
   padding-bottom: 1rem;
 }
-
+/* 
 .mainscreen-header {
   text-align: center;
   font-size: 30px;
   background-color: rgb(0, 0, 0);
   color: aliceblue;
-  /* padding-bottom: 1rem; */
+  padding-bottom: 1rem;
 }
+
+@media screen and (min-width:400px) {
+  
+}.login-formMedia {
+  background-color: black;
+} */
