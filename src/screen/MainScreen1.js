@@ -4,12 +4,13 @@ import axios from "axios";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
 
 export default function MainScreen() {
   const [newsurl, setNewsurl] = useState("");
@@ -77,12 +78,26 @@ export default function MainScreen() {
 
   return (
     <div>
-      <header className="mainscreen-header">NEWSLETTER AI</header>
-      <body
+      <div className="bg-black">
+        <Link className="bg-black" to="/">
+          <FaHome
+            style={{
+              color: "white",
+              width: "2rem",
+              height: "2rem",
+              marginLeft: "2rem",
+              marginTop: "1rem"
+            }}
+          />
+        </Link>
+        <div className="mainscreen-header">BUGLE AI</div>
+      </div>
+
+      <div
         style={{
           paddingLeft: "5%",
           paddingRight: "10%",
-          backgroundColor: "#1f2423",
+          backgroundColor: "black",
           paddingBottom: "2rem",
           minHeight: "90vh"
         }}
@@ -94,7 +109,7 @@ export default function MainScreen() {
           >
             <Col sm={3}>
               <Form.Label className="text-white align-self-lg-start" column>
-                Input News article URL's
+                Input News Article URL's
               </Form.Label>
             </Col>
             <Col sm={9}>
@@ -145,7 +160,7 @@ export default function MainScreen() {
           )}
         </Form>
         {loading ? (
-          <div className="process-bar">
+          <div className="d-flex justify-content-center align-content-center">
             <Box sx={{ display: "flex" }}>
               <CircularProgress size={100} />
             </Box>
@@ -154,7 +169,7 @@ export default function MainScreen() {
           <div>
             {data.map((item, index) => (
               <div key={index}>
-                <Form className="bg-black pb-3 mb-3 p-lg-5 rounded-4">
+                <Form className="bg-black pb-3 mb-3 p-lg-5 rounded-4 border border-white">
                   <Form.Group
                     className="pt-1 fs-5 d-flex justify-content-between"
                     as={Row}
@@ -241,7 +256,7 @@ export default function MainScreen() {
                 </Form>
               </div>
             ))}
-            <div className="bg-black pt-3 pb-3 p-lg-4 rounded-4">
+            <div className="bg-black pt-3 pb-3 p-lg-4 rounded-4 border border-white">
               <Form.Group
                 className="pt-3 fs-5 d-flex justify-content-between"
                 as={Row}
@@ -264,10 +279,10 @@ export default function MainScreen() {
             </div>
           </div>
         )}
-      </body>
-      <footer className="text-center text-white bg-black">
+      </div>
+      {/* <footer className="text-center text-white bg-black">
         RESERVED BY LEO
-      </footer>
+      </footer> */}
     </div>
   );
 }
