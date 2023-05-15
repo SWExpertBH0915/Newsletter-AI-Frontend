@@ -7,7 +7,7 @@ export default function HomeScreen() {
     <>
       <div
         className="row pt-4 mx-0"
-        style={{ backgroundColor: "#0e0e0e", height: "15vh" }}
+        style={{ backgroundColor: "black", height: "15vh" }}
       >
         <div className="col-md-2 d-flex align-self-lg-start px-4 fs-6">
           <Link className="text-decoration-none text-white fs-6" to="/">
