@@ -15,15 +15,23 @@ export default function Login() {
     console.log(email);
   };
   return (
-    <div className="border border-black bg-black text-white p-4 shadow d-flex text-center min-vh-100 align-items-center justify-content-center">
+    <div className="bg-black text-white shadow d-flex text-center min-vh-100 align-items-center justify-content-center">
       {/* <h2 className="mb-4 text-center">Log In</h2> */}
-      <Form className="login-formMedia">
+      <Form
+        className="login-formMedia"
+        style={{
+          // backgroundColor: "#0e0f0f",
+          padding: "2rem",
+          border: "1px solid #ffffff",
+          borderRadius: "20px"
+        }}
+      >
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
+          <Form.Label className="float-start">Email</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className="float-start">Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
         <Form.Group className="d-flex justify-content-end align-items-center pt-3">
@@ -33,7 +41,7 @@ export default function Login() {
         </Form.Group>
         <Form.Group>
           <Button
-            className="btn btn-sm btn-white bg-white text-black border-0 text-decoration-underline mt-4"
+            className="btn btn-sm btn-white bg-black text-white border-0 text-decoration-underline mt-4"
             onClick={() => {
               navigate("/register");
             }}
