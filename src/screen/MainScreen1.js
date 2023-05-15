@@ -14,7 +14,9 @@ import { FaHome } from "react-icons/fa";
 
 export default function MainScreen() {
   const [newsurl, setNewsurl] = useState("");
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState(
+    "Summarize this article into 3 to 5 bullet points, using humour and an educational style"
+  );
   const [totalProm, setTotalProm] = useState("");
   const [tones, setTones] = useState("serious");
   const initailData = [
