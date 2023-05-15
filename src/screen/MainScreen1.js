@@ -117,7 +117,7 @@ export default function MainScreen() {
       <div
         style={{
           paddingLeft: "5%",
-          paddingRight: "10%",
+          paddingRight: "5%",
           backgroundColor: "black",
           paddingBottom: "2rem",
           minHeight: "90vh"
