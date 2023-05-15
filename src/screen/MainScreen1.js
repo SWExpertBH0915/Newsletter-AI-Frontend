@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import blankimg from "../img/blank.PNG";
+import blankimg from "../img/blank.png";
 import axios from "axios";
 
 import CircularProgress from "@mui/material/CircularProgress";
