@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { redirect } from "react-router-dom";
-export const Login = () => {
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
+export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   // const [name, setName] = useState("");
@@ -9,60 +14,43 @@ export const Login = () => {
     e.preventDefault();
     console.log(email);
   };
+
+  const styles = {
+    [`@media (min-width: 300px)`]: {
+      width: "100vh"
+    }
+  };
   return (
     <div
-      className="border border-black shadow p-lg-3"
-      style={{
-        position: "absolute",
-        top: "30%",
-        left: "50%",
-        transform: "translate(-50%, -50%)"
-      }}
+      className="border border-black p-4 shadow position-absolute top-50 start-50 translate-middle"
+      style={styles}
     >
       <h2 className="mb-4 text-center">Log In</h2>
-      <form className="m-lg-5" onSubmit={handleSubmit}>
-        <div className="row mb-4">
-          <label className="col-lg-4" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="col-lg-8"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your Email"
-            id="email"
-            name="email"
-          />
-        </div>
-        <div className="row">
-          <label className="col-lg-4" htmlFor="password">
-            Password
-          </label>
-          <input
-            className="col-lg-8"
-            type="password"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-            placeholder="*****"
-            id="password"
-            name="password"
-          />
-        </div>
-        <div className="d-flex justify-content-end align-items-center">
-          <button className="btn btn-sm btn-success mt-3 mb-3" type="submit">
-            Log In
-          </button>
-        </div>
-      </form>
-      <button
-        className="btn border-0 text-decoration-underline"
-        onClick={() => {
-          redirect("/register");
-        }}
-      >
-        Don't have an account? Register here
-      </button>
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" />
+        </Form.Group>
+        <Form.Group className="d-flex justify-content-end align-items-center pt-3">
+          <Button variant="primary" onClick={handleSubmit}>
+            Login
+          </Button>
+        </Form.Group>
+        <Form.Group>
+          <Button
+            className="btn btn-sm btn-white bg-white text-black border-0 text-decoration-underline mt-4"
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
+            Don't Have an account? Register here
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
   );
-};
+}

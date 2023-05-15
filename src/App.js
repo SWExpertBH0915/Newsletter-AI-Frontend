@@ -1,10 +1,10 @@
 import "./App.css";
 import HomeScreen from "./screen/HomeScreen";
-import { Login } from "./components/Login";
-import { Register } from "./components/Register";
+// import { Register } from "./components/Register";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainScreen1 from "./screen/MainScreen1";
 import BasicExample from "./screen/BasicExample";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/basic" element={<BasicExample />} />
 
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
         </Routes>
       </div>
     </BrowserRouter>
