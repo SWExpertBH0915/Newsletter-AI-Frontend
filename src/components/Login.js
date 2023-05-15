@@ -15,7 +15,7 @@ export default function Login() {
     console.log(email);
   };
   return (
-    <div className="bg-black text-white p-1 d-flex text-center min-vh-100 align-items-center justify-content-center">
+    <div className="bg-black text-white p-3 d-flex text-center min-vh-100 align-items-center justify-content-center">
       {/* <h2 className="mb-4 text-center">Log In</h2> */}
       <Form
         className="login-formMedia"
