@@ -146,6 +146,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
+  const roles = ["user"];
 
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
@@ -175,7 +176,7 @@ const Register = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password))
+      dispatch(register(username, email, password, roles))
         .then(() => {
           setSuccessful(true);
         })

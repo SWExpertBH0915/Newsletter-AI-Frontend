@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import newsImg1 from "../img/news1.png";
 import newsImg2 from "../img/news2.png";
 import newsImg3 from "../img/news3.png";
-import Vector from "../img/AI_Icon.PNG";
+import { ReactComponent as LogoIcon } from "../img/icon.svg";
 
 export default function HomeScreen() {
   return (
@@ -12,8 +12,8 @@ export default function HomeScreen() {
       <div style={{ height: "18vh" }}>
         <Header />
       </div>
-      <div className="row d-flex flex-row w-100 mb-5 h-100">
-        <div className="main-body-text col-md-6 text-white text-center d-flex flex-column justify-content-center align-items-start">
+      <div className="main-body text-white">
+        <div className="main-body-text">
           <div>
             Let's Generate <br />
           </div>
@@ -21,32 +21,29 @@ export default function HomeScreen() {
             <span className="text-success">Newsletters</span> with AI!
           </div>
         </div>
-        <div className="image-stack col-md-6 d-flex justify-content-end align-items-center">
+
+        <div className="image-stack d-flex justify-content-end align-items-center">
           <img
             src={newsImg2}
             alt=""
-            className="image1"
-            style={{ transform: "rotate(15deg)", width: "25vh" }}
-          />
-          <img
-            src={newsImg1}
-            alt=""
             className="image2"
-            style={{ transform: "rotate(-20deg)", width: "25vh", top: "100px" }}
+            style={{ transform: "rotate(-14deg)", width: "19vh" }}
           />
-
           <img
             src={newsImg3}
             alt=""
             className="image3"
-            style={{ transform: "rotate(5deg)", width: "20vh" }}
+            style={{ transform: "rotate(13deg)", width: "24vh" }}
+          />
+          <img
+            src={newsImg1}
+            alt=""
+            className="image1"
+            style={{ transform: "rotate(-6deg)", width: "26vh" }}
           />
         </div>
       </div>
-      <div
-        className="text-content text-white fs-2 d-flex flex-column justify-content-center align-items-center"
-        style={{ fontFamily: "Segoe UI", fontWeight: "solid" }}
-      >
+      <div className="main-text-content">
         <div>Generate your Content</div>
         <div>
           <span>in </span>
@@ -54,74 +51,38 @@ export default function HomeScreen() {
           <span> simple steps</span>
         </div>
       </div>
-      <div
-        className="row text-white text-center d-flex flex-row"
-        style={{ marginRight: "5%" }}
-      >
-        <div className="col-md-4 mt-5">
-          <div
-            className="p-3 d-flex flex-column justify-content-center align-items-center m-3 w-100 h-100"
-            style={{
-              border: "solid",
-              borderColor: "white",
-              borderRadius: "70px"
-            }}
-          >
-            <span className="fs-1">1</span>
-            <span>Input the links in the following the articles:</span>
-          </div>
+      <div className="main-step">
+        <div>
+          <span id="main-step-nupmber">1</span>
+          <span>Input the links in the following the articles:</span>
         </div>
-        <div className="col-md-4 mt-5">
-          <div
-            className="p-3 d-flex flex-column justify-content-center align-items-center m-3 w-100 h-100"
-            style={{
-              border: "solid",
-              borderColor: "white",
-              borderRadius: "70px"
-            }}
-          >
-            <span className="fs-1">2</span>
-            <span>Choose the tone:</span>
-          </div>
+        <div>
+          <span id="main-step-nupmber">2</span>
+          <span>Choose the tone:</span>
         </div>
-
-        <div className="col-md-4 mt-5">
-          <div
-            className="p-3 d-flex flex-column justify-content-center align-items-center m-3 w-100 h-100"
-            style={{
-              border: "solid",
-              borderColor: "white",
-              borderRadius: "70px"
-            }}
-          >
-            <span className="fs-1">3</span>
-            <span>Hit "Submit" and let our little robots do their thing</span>
-          </div>
+        <div>
+          <span id="main-step-nupmber">3</span>
+          <span>Hit "Submit" and let our little robots do their thing</span>
         </div>
       </div>
-      <div className="mt-5">
-        <div className="p-0 d-flex justify-content-start align-items-center">
-          <div
-            className="d-flex justify-content-center"
-            style={{ marginRight: "15%" }}
-          >
-            <img
-              className="main-foot-img"
-              style={{ width: "45px", height: "45px" }}
-              src={Vector}
-              alt=""
-            ></img>
-            <label className="text-white fs-2 mt-0 ms-2">BUGLE AI</label>
+      <div className="main-foot">
+        <div
+          className="d-flex justify-content-center"
+          style={{ marginRight: "15%" }}
+        >
+          <div id="main-vector-img">
+            <LogoIcon />
           </div>
-          <div className="w-50 pe-5 text-white d-flex flex-row justify-content-between align-items-center">
-            <div>Watch Demo</div>
-            <div>Getstarted</div>
-            <div>ContactUs</div>
-          </div>
+          <label className="text-white fs-2 mt-0 ms-2">BUGLE AI</label>
+        </div>
+        <div className="main-foot-items">
+          <div>Watch Demo</div>
+          <div>Getstarted</div>
+          <div>ContactUs</div>
         </div>
       </div>
       <div className="footer">
-        <h3 className="text-white fs-6 mt-5 pt-5 pb-5">
+        <h3 className="text-white fs-6 pt-1 pb-5">
           @Bugle AI 2023, all rights reserved
         </h3>
       </div>

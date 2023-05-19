@@ -8,6 +8,7 @@
   font-family: "Segoe UI";
   font-weight: bold;
   height: 50vh;
+  width: 50%;
 }
 
 .main-site-text {
@@ -25,7 +26,6 @@
 #main-header-user {
   width: 40px;
   height: 40px;
-  margin-left: 15px;
   border-radius: 20px;
   background-color: #198754;
   display: flex;
@@ -35,7 +35,11 @@
 #main-header-user:hover {
   opacity: 50%;
 }
-.main-header-drop:hover {
+#main-header-drop {
+  width: 25px;
+  height: auto;
+}
+#main-header-drop:hover {
   opacity: 50%;
 }
 @media screen and (max-width: 920px) {
@@ -45,9 +49,7 @@
   #main-header-user {
     display:none
   }
-  .main-body-text {
-    font-size: 40px;
-  }
+
   .main-foot-img {
     display:none
   }
@@ -55,7 +57,7 @@
 
 
 @media screen and (min-width: 921px) {
-  .main-header-drop {
+  #main-header-drop {
     display: none;
   }
 }
@@ -120,13 +122,17 @@ label {
 
 .image-stack {
   position: relative;
-  width: 40vh; /* Adjust the container size as needed */
+  width: 40vh;
   height: 45vh;
   border: solid;
   border-color: #f7f7f7;
   border-radius: 100px;
   margin-right: 0%;
   overflow: hidden;
+  margin-left: 20%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .image-stack img {
@@ -134,16 +140,163 @@ label {
 }
 
 .image1 {
-  top: 100px;
-  left: 100px;
+  top: 174px;
+  left: -12px;
 }
 
 .image2 {
-  top: 0px;
-  left: 150px;
+  top: 93px;
+  left: 78px;
 }
 
 .image3 {
-  top: 50px;
-  left: 50px;
+  top: 123px;
+    left: 130px;;
+}
+
+.main-step > div {
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  border: solid;
+  border-color: white;
+  border-radius: 100px;
+  width: 100%;
+  height:18vh;
+  color: white;
+}
+
+#main-step-nupmber {
+  font-size: 40px;
+}
+
+
+.main-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5rem;
+}
+
+.main-body-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.main-step {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 950px) {
+  .main-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .main-body-text {
+    align-items: center;
+    width: 100%;
+  }
+  .image-stack {
+    justify-content: center;
+    margin: 0px;
+  }
+  
+  .image-stack img {
+    position: absolute;
+  }
+  .main-step {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .main-step > div {
+    width: 62%;
+    height: 23vh;
+  }
+  #main-vector-img {
+    display: none;
+  }
+  .main-foot {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-body-text{
+    font-size: 43px;
+    margin-left: 0%;
+    align-self: center;
+  }
+  .main-text-content > div {
+    font-size: 20px;
+  }
+  .main-text-content {
+    margin: 0px;
+  }
+}
+
+.main-text-content {
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+  font-family: "Segoe UI";
+  font-weight: solid;
+}
+
+@media screen and (max-width: 420px) {
+  .image-stack {    
+    width: 100%;
+  }
+}
+
+.main-foot {
+  padding: 0px;
+  display: flex;
+  justify-content: start;
+  align-items: center ;
+  margin-top: 5rem;
+}
+
+.main-foot-items {
+  width: 50%;
+  padding-left: 5rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* #tbg-btn-1 {
+  border-radius: 21px;
+  margin-right: 5vh;
+  width: 25vh;
+  height: auto;
+  font-size: 19px;
+} */
+
+
+.modal-user-info {
+  width: 80vh; /* Set your desired width */
+  height: 80vh; /* Set your desired height */
+  margin: auto;
 }

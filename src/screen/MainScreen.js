@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import blankimg from "../img/blank.png";
 import axios from "axios";
 
@@ -6,21 +7,21 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Col, Row, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { Col, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import Header from "../components/Header";
 import { colors } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export default function MainScreen() {
   const [newsurl, setNewsurl] = useState("");
-  const [prompt, setPrompt] = useState(
-    "Summarize this article into 3 to 5 bullet points, using humour and an educational style"
-  );
-  const [totalProm, setTotalProm] = useState("");
-  const [tones, setTones] = useState("serious");
+
+  const [styles, setStyles] = useState("bullet point style");
+  const [tones, setTones] = useState("authoritative");
+
   const initailData = [
     {
       url: "",
@@ -56,7 +57,7 @@ export default function MainScreen() {
     setData([]);
     var urlCheck = [];
 
-    if (newsurl === "" || prompt === "" || totalProm === "") {
+    if (newsurl === "") {
       alert("Please input URL and Prompt");
     } else {
       const lines = newsurl.split("\n");
@@ -68,8 +69,7 @@ export default function MainScreen() {
       if (urlCheck.every((value) => value === true)) {
         const body = {
           urls: urls,
-          prompt: prompt,
-          totalProm: totalProm,
+          styles: styles,
           tones: tones
         };
         setLoading(true);
@@ -89,16 +89,18 @@ export default function MainScreen() {
     e.preventDefault();
     setNewsurl(e.target.value);
   };
-  const handleOnChangeProm = (e) => {
-    e.preventDefault();
-    setPrompt(e.target.value);
-  };
-  const handelOnChangeTprom = (e) => {
-    e.preventDefault();
-    setTotalProm(e.target.value);
-  };
 
   const handelOnChangeTone = (val) => setTones(val);
+  const handelOnChangeStyle = (val) => setStyles(val);
+
+  const { user: currentUser } = useSelector((state) => state.auth);
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
+
+  if (currentUser.expiredays <= 0) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="main-header home-main bg-black mb-0 bg-gradient py-3">
       <div style={{ height: "18vh" }}>
@@ -115,149 +117,349 @@ export default function MainScreen() {
               marginTop: "1rem"
             }}
           />
-        </Link>
+        </Link> 
       </div> */}
+      <div>
+        <div className="d-flex flex-column text-white">
+          <label style={{ fontSize: "60px" }}>
+            Step
+            <span style={{ fontWeight: "bolder", color: "#07874d" }}>1</span>
+          </label>
+          <label style={{ fontSize: "25px" }}>
+            Input them{" "}
+            <span style={{ fontWeight: "bolder", color: "#07874d" }}>
+              URL links{" "}
+            </span>
+            to your source articles:
+          </label>
+          <div>
+            <label>Input News Article URL's</label>
+          </div>
+        </div>
+        <Form className="mb-4">
+          <Form.Group className="pt-4 pb-4 d-flex justify-content-between">
+            <Form.Control
+              as="textarea"
+              rows={10}
+              onChange={(e) => {
+                handleOnChange(e);
+              }}
+              placeholder="Maximum 10 URL's, one on each line"
+              style={{
+                color: "white",
+                backgroundColor: "transparent",
+                borderRadius: "4vh",
+                paddingLeft: "20px",
+                paddingRight: "10px",
+                paddingTop: "20px"
+              }}
+            />
+          </Form.Group>
+        </Form>
+      </div>
+
+      <div>
+        <div className="d-flex flex-column text-white">
+          <label style={{ fontSize: "60px" }}>
+            Step
+            <span style={{ fontWeight: "bolder", color: "#07874d" }}>2</span>
+          </label>
+          <label style={{ fontSize: "25px" }}>
+            Choose your summary{" "}
+            <span style={{ fontWeight: "bolder", color: "#07874d" }}>
+              style{" "}
+            </span>
+            :
+          </label>
+          <ToggleButtonGroup
+            className="btn d-flex flex-wrap justify-content-between align-items-center"
+            type="radio"
+            name="style-opetions"
+            size="sm"
+            value={styles}
+            onChange={handelOnChangeStyle}
+            style={{ paddingLeft: "0px" }}
+          >
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-11"
+              value="bullet point style"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Bullet Point Style
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-12"
+              value="short paragraph style"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Short Paragraph Style
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-13"
+              value="long paragraph style"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Long Paragraph Style
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <label style={{ fontSize: "25px" }}>
+            Choose{" "}
+            <span style={{ fontWeight: "bolder", color: "#07874d" }}>
+              tone{" "}
+            </span>
+            :
+          </label>
+          <ToggleButtonGroup
+            className="btn d-flex justify-content-center flex-wrap align-items-center"
+            type="radio"
+            name="tone-options"
+            size="sm"
+            value={tones}
+            onChange={handelOnChangeTone}
+            style={{ paddingLeft: "0px" }}
+          >
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-1"
+              value="authoritative"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Authoritative
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-2"
+              value="friendly"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Friendly
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-3"
+              value="sarcastic"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Sarcastic
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-4"
+              value="calm"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Calm
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-5"
+              value="enthusiastic"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Enthusiastic
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-6"
+              value="formal"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Formal
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-7"
+              value="whimsical"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Whimsical
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-8"
+              value="humourous"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Humourous
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-9"
+              value="inquisitive"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Inquisitive
+            </ToggleButton>
+
+            <ToggleButton
+              variant="outline-light"
+              id="tbg-btn-10"
+              value="whith Emoji's"
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "25vh",
+                height: "auto",
+                fontSize: "15px",
+                paddingTop: "10px",
+                paddingBottom: "10px"
+              }}
+            >
+              Whith Emoji's
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+      </div>
+
       <div className="d-flex flex-column text-white">
         <label style={{ fontSize: "60px" }}>
           Step
-          <span style={{ fontWeight: "bolder", color: "#07874d" }}>1</span>
+          <span style={{ fontWeight: "bolder", color: "#07874d" }}>3</span>
         </label>
         <label style={{ fontSize: "25px" }}>
-          Input them{" "}
+          Hit{" "}
           <span style={{ fontWeight: "bolder", color: "#07874d" }}>
-            URL links{" "}
+            submit{" "}
           </span>
-          to your source articles:
+          and let our little robots do their thing
         </label>
-        <div>
-          <label>Input News Article URL's</label>
-        </div>
+        {loading ? (
+          <div className="d-flex justify-content-end mt-4">
+            <Button variant="warning" type="submit" disabled>
+              Loading..
+            </Button>
+          </div>
+        ) : (
+          <div className="d-flex justify-content-start mt-4">
+            <Button
+              variant="success"
+              type="submit"
+              onClick={handleOnClick}
+              style={{ borderRadius: "20px" }}
+            >
+              Submit
+            </Button>
+          </div>
+        )}
       </div>
 
       <div
         style={{
-          paddingLeft: "5%",
-          paddingRight: "5%",
-          backgroundColor: "black",
+          backgroundColor: "transparent",
           paddingBottom: "2rem",
           minHeight: "90vh"
         }}
       >
-        <Form className="mb-4">
-          <Form.Group
-            className="pt-5 pb-4 fs-5 d-flex justify-content-between"
-            as={Row}
-          >
-            <Col sm={3}>
-              <Form.Label className="text-white align-self-lg-start" column>
-                Input News Article URL's
-              </Form.Label>
-            </Col>
-            <Col sm={9}>
-              <Form.Control
-                className="fs-6 bg-body"
-                as="textarea"
-                rows={5}
-                onChange={(e) => {
-                  handleOnChange(e);
-                }}
-                placeholder="Article URLs"
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group
-            className="pt-3 pb-4 fs-5 d-flex justify-content-between"
-            as={Row}
-          >
-            <Col sm={3}>
-              <Form.Label className="text-white align-self-lg-start" column>
-                Input/Edit Prompt
-              </Form.Label>
-            </Col>
-            <Col className="align-self-center" sm={9}>
-              <Form.Control
-                className="fs-6"
-                onChange={(e) => {
-                  handleOnChangeProm(e);
-                }}
-                defaultValue="Summarize this article into 3 to 5 bullet points, using humour and an educational style"
-                placeholder="Prompt"
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group
-            className="pt-3 pb-4 fs-5 d-flex justify-content-between"
-            as={Row}
-          >
-            <Col sm={3}>
-              <Form.Label className="text-white align-self-lg-start" column>
-                Input/Edit Total Summary Prompt
-              </Form.Label>
-            </Col>
-            <Col className="align-self-center" sm={9}>
-              <Form.Control
-                className="fs-6"
-                onChange={(e) => {
-                  handelOnChangeTprom(e);
-                }}
-                placeholder="Total Summary Prompt"
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group
-            className="pt-3 pb-4 fs-5 d-flex justify-content-between"
-            as={Row}
-          >
-            <Col sm={3}>
-              <Form.Label className="text-white align-self-lg-start" column>
-                Tones
-              </Form.Label>
-            </Col>
-            <Col className="align-self-center" sm={9}>
-              <ToggleButtonGroup
-                className="btn"
-                type="radio"
-                name="options"
-                size="sm"
-                value={tones}
-                onChange={handelOnChangeTone}
-              >
-                <ToggleButton
-                  variant="secondary"
-                  id="tbg-btn-1"
-                  value="serious"
-                >
-                  Serious
-                </ToggleButton>
-                <ToggleButton variant="secondary" id="tbg-btn-2" value="humour">
-                  Humour
-                </ToggleButton>
-                <ToggleButton
-                  variant="secondary"
-                  id="tbg-btn-3"
-                  value="education"
-                >
-                  Education
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </Col>
-          </Form.Group>
-
-          {loading ? (
-            <div className="d-flex justify-content-end">
-              <Button variant="warning" type="submit" disabled>
-                Loading..
-              </Button>
-            </div>
-          ) : (
-            <div className="d-flex justify-content-end">
-              <Button variant="success" type="submit" onClick={handleOnClick}>
-                Submit
-              </Button>
-            </div>
-          )}
-        </Form>
-        <div className="text-white fs-2 p-xl-3">Reault</div>
+        <div className="text-white fs-1 text-center">Reault</div>
         {loading ? (
           <div className="d-flex justify-content-center align-content-center">
             <Box sx={{ display: "flex" }}>
@@ -268,112 +470,130 @@ export default function MainScreen() {
           <div>
             {data.map((item, index) => (
               <div key={index} exact="true">
-                <Form className="bg-black pb-3 mb-3 p-lg-5 rounded-4 border border-white">
-                  <Form.Group
-                    className="pt-1 fs-5 d-flex justify-content-between"
-                    as={Row}
-                  >
-                    <Col sm={3}>
-                      <Form.Label
-                        className="text-white align-self-lg-start fs-5"
-                        column
-                      >
-                        URL
-                      </Form.Label>
-                    </Col>
-                    <Col className="align-self-center" sm={9}>
-                      <Form.Control
-                        className="fs-6"
-                        value={item.url}
-                        disabled
-                      />
-                    </Col>
+                <Form className="bg-transparent pb-3 mb-3">
+                  <div className="d-flex flex-row justify-content-between align-content-center">
+                    <Form.Group className="pt-1 fs-5 w-50 me-2">
+                      <Col>
+                        <Form.Label
+                          className="align-self-lg-start fs-5"
+                          column
+                          style={{ fontWeight: "bolder", color: "#07874d" }}
+                        >
+                          URL
+                        </Form.Label>
+                      </Col>
+                      <Col className="align-self-center">
+                        <Form.Control
+                          className="fs-5 rounded-5"
+                          value={item.url}
+                          disabled
+                          style={{
+                            color: "white",
+                            backgroundColor: "transparent",
+                            paddingLeft: "20px",
+                            paddingRight: "10px"
+                          }}
+                        />
+                      </Col>
+                    </Form.Group>
+                    <Form.Group className="pt-1 fs-5 w-50 ms-2">
+                      <Col>
+                        <Form.Label
+                          className="align-self-lg-start"
+                          column
+                          style={{ fontWeight: "bolder", color: "#07874d" }}
+                        >
+                          Headline
+                        </Form.Label>
+                      </Col>
+                      <Col className="align-self-center">
+                        <Form.Control
+                          className="fs-5 rounded-5"
+                          value={item.headline}
+                          disabled
+                          style={{
+                            color: "white",
+                            backgroundColor: "transparent",
+                            paddingLeft: "20px",
+                            paddingRight: "10px"
+                          }}
+                        />
+                      </Col>
+                    </Form.Group>
+                  </div>
+                  <Form.Group className="pt-3 pb-3 fs-5">
+                    <Form.Label
+                      className="align-self-lg-start"
+                      column
+                      style={{ fontWeight: "bolder", color: "#07874d" }}
+                    >
+                      Contents
+                    </Form.Label>
+
+                    <Form.Control
+                      className="fs-6 rounded-5"
+                      as="textarea"
+                      rows={8}
+                      value={item.content.trim()}
+                      disabled
+                      style={{
+                        color: "white",
+                        backgroundColor: "transparent",
+                        paddingLeft: "20px",
+                        paddingRight: "10px"
+                      }}
+                    />
                   </Form.Group>
-                  <Form.Group
-                    className="pt-3 fs-5 d-flex justify-content-between"
-                    as={Row}
-                  >
-                    <Col sm={3}>
-                      <Form.Label
-                        className="text-white align-self-lg-start"
-                        column
-                      >
-                        Headline
-                      </Form.Label>
-                    </Col>
-                    <Col className="align-self-center" sm={9}>
-                      <Form.Control
-                        className="fs-5"
-                        value={item.headline}
-                        disabled
-                      />
-                    </Col>
-                  </Form.Group>
-                  <Form.Group
-                    className="pt-3 pb-3 fs-5 d-flex justify-content-between"
-                    as={Row}
-                  >
-                    <Col sm={3}>
-                      <Form.Label
-                        className="text-white align-self-lg-start"
-                        column
-                      >
-                        Contents
-                      </Form.Label>
-                    </Col>
-                    <Col className="align-self-center" sm={9}>
-                      <Form.Control
-                        className="fs-6"
-                        as="textarea"
-                        rows={8}
-                        value={item.content.trim()}
-                        disabled
-                      />
-                    </Col>
-                  </Form.Group>
-                  <Form.Group
-                    className="pt-3 fs-5 d-flex justify-content-between"
-                    as={Row}
-                  >
-                    <Col sm={3}>
-                      <Form.Label
-                        className="text-white align-self-lg-start"
-                        column
-                      >
-                        Image
-                      </Form.Label>
-                    </Col>
-                    <Col className="align-self-center" sm={9}>
+                  <Form.Group className="pt-3 fs-5">
+                    <Form.Label
+                      className="align-self-lg-start"
+                      column
+                      style={{ fontWeight: "bolder", color: "#07874d" }}
+                    >
+                      Image
+                    </Form.Label>
+
+                    <div
+                      style={{
+                        borderColor: "white",
+                        border: "solid",
+                        borderRadius: "5vh",
+                        padding: "1vh"
+                      }}
+                    >
                       <Image
                         className="img-fluid img-thumbnail rounded mx-auto d-block"
                         src={item.imgurl}
                         alt={blankimg}
-                        // width="600px"
                       ></Image>
-                    </Col>
+                    </div>
                   </Form.Group>
                 </Form>
               </div>
             ))}
-            <div className="bg-black pt-3 pb-3 p-lg-4 rounded-4 border border-white">
-              <Form.Group
-                className="pt-3 fs-5 d-flex justify-content-between"
-                as={Row}
-              >
-                <Col sm={3}>
-                  <Form.Label className="text-white align-self-lg-start" column>
-                    Intro Summary Text
-                  </Form.Label>
-                </Col>
-                <Col className="align-self-center" sm={9}>
-                  <Form.Control
-                    className="fs-6"
-                    as="textarea"
-                    rows={10}
-                    value={totalsum.trim()}
-                    disabled
-                  />
-                </Col>
+            <div className="bg-transparent pt-3 pb-3">
+              <Form.Group className="pt-3 pb-3 fs-5">
+                <Form.Label
+                  className="align-self-lg-start"
+                  column
+                  style={{ fontWeight: "bolder", color: "#07874d" }}
+                >
+                  Contents
+                </Form.Label>
+
+                <Form.Control
+                  className="fs-6 rounded-5"
+                  as="textarea"
+                  rows={8}
+                  value={totalsum.trim()}
+                  disabled
+                  style={{
+                    color: "white",
+                    backgroundColor: "transparent",
+                    paddingLeft: "20px",
+                    paddingRight: "10px"
+                  }}
+                />
               </Form.Group>
             </div>
           </div>

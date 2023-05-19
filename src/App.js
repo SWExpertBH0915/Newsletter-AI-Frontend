@@ -13,9 +13,9 @@ import { useEffect } from "react";
 // import { useCallback } from "react";
 // import { logout } from "./actions/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ProfileScreen from "./screen/ProfileScreen";
 
 function App() {
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
 
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -35,10 +35,8 @@ function App() {
 
   useEffect(() => {
     if (currentUser) {
-      setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
     } else {
-      setShowModeratorBoard(false);
       setShowAdminBoard(false);
     }
   }, [currentUser]);
@@ -48,7 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/mainscreen" element={<MainScreen />} />
-
+        <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
