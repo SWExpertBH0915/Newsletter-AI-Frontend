@@ -54,15 +54,20 @@ export default function HomeScreen() {
       <div className="main-step">
         <div>
           <span id="main-step-nupmber">1</span>
-          <span>Input the links in the following the articles:</span>
+          <span id="main-step-content">
+            Input the links in the following the articles:
+          </span>
         </div>
         <div>
           <span id="main-step-nupmber">2</span>
-          <span>Choose the tone:</span>
+          <span id="main-step-content">Choose the tone:</span>
         </div>
         <div>
           <span id="main-step-nupmber">3</span>
-          <span>Hit "Submit" and let our little robots do their thing</span>
+          <span id="main-step-content">
+            Hit <span className="fw-bold">"Submit"</span> and let our little
+            robots do their thing
+          </span>
         </div>
       </div>
       <div className="main-foot">

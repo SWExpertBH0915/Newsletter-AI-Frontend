@@ -35,7 +35,7 @@ export default function MainScreen() {
 
   const [loading, setLoading] = useState(false);
 
-  const baseURL = process.env.REACT_APP_BASEURL;
+  const BASE_URL = process.env.REACT_APP_BASEURL;
 
   const isUrl = (str) => {
     const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -73,7 +73,8 @@ export default function MainScreen() {
           tones: tones
         };
         setLoading(true);
-        const res = await axios.post(baseURL + "/article", body);
+        console.log(BASE_URL + "/article");
+        const res = await axios.post(BASE_URL + "/article", body);
         setData(res.data.result);
         setTotalsum(res.data.totalreulst);
         setLoading(false);
@@ -99,26 +100,13 @@ export default function MainScreen() {
   }
 
   if (currentUser.expiredays <= 0) {
-    return <Navigate to="/" />;
+    return <Navigate to="/profile" />;
   }
   return (
     <div className="main-header home-main bg-black mb-0 bg-gradient py-3">
       <div style={{ height: "18vh" }}>
         <Header />
       </div>
-      {/* <div className="bg-black">
-        <Link to="/">
-          <FaHome
-            style={{
-              color: "white",
-              width: "2rem",
-              height: "2rem",
-              marginLeft: "2rem",
-              marginTop: "1rem"
-            }}
-          />
-        </Link> 
-      </div> */}
       <div>
         <div className="d-flex flex-column text-white">
           <label style={{ fontSize: "60px" }}>
@@ -459,7 +447,7 @@ export default function MainScreen() {
           minHeight: "90vh"
         }}
       >
-        <div className="text-white fs-1 text-center">Reault</div>
+        <div className="text-white fs-1 text-center">Result</div>
         {loading ? (
           <div className="d-flex justify-content-center align-content-center">
             <Box sx={{ display: "flex" }}>
@@ -475,7 +463,7 @@ export default function MainScreen() {
                     <Form.Group className="pt-1 fs-5 w-50 me-2">
                       <Col>
                         <Form.Label
-                          className="align-self-lg-start fs-5"
+                          className="align-self-lg-start"
                           column
                           style={{ fontWeight: "bolder", color: "#07874d" }}
                         >
@@ -484,7 +472,7 @@ export default function MainScreen() {
                       </Col>
                       <Col className="align-self-center">
                         <Form.Control
-                          className="fs-5 rounded-5"
+                          className="fs-6 rounded-5"
                           value={item.url}
                           disabled
                           style={{
@@ -508,7 +496,7 @@ export default function MainScreen() {
                       </Col>
                       <Col className="align-self-center">
                         <Form.Control
-                          className="fs-5 rounded-5"
+                          className="fs-6 rounded-5"
                           value={item.headline}
                           disabled
                           style={{

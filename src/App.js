@@ -5,15 +5,15 @@ import MainScreen from "./screen/MainScreen";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import { useDispatch, useSelector } from "react-redux";
-// import store from "./store";
-// import { history } from "./helpers/history";
 import { clearMessage } from "./actions/message";
 import { useState } from "react";
 import { useEffect } from "react";
-// import { useCallback } from "react";
-// import { logout } from "./actions/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileScreen from "./screen/ProfileScreen";
+import Payment from "./Payment/Stripe/Payment";
+import AuthVerify from "./common/AuthVerify";
+import { logout } from "./actions/auth";
+// import StripePay from "./Payment/StripePay";
 
 function App() {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -41,6 +41,10 @@ function App() {
     }
   }, [currentUser]);
 
+  const logOut = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="App">
       <Routes>
@@ -49,7 +53,10 @@ function App() {
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* <Route path="/stripepay" element={<StripePay />} /> */}
+        <Route path="/payment" element={<Payment />} />
       </Routes>
+      <AuthVerify logOut={logOut} />
     </div>
   );
 }
