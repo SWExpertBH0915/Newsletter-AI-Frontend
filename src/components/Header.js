@@ -38,6 +38,8 @@ export default function Header() {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  console.log(currentUser);
   return (
     <div className="main-header row pt-1 p-0 m-0">
       <div className="col-8 p-0 d-flex justify-content-start align-items-center">
@@ -101,6 +103,11 @@ export default function Header() {
                     <Dropdown.Item href="/profile" style={{ color: "white" }}>
                       User Info
                     </Dropdown.Item>
+                    {currentUser.roles[0] === "ROLE_ADMIN" && (
+                      <Dropdown.Item href="/admin" style={{ color: "white" }}>
+                        Admin
+                      </Dropdown.Item>
+                    )}
                     <Dropdown.Item onClick={logOut} style={{ color: "white" }}>
                       Logout
                     </Dropdown.Item>

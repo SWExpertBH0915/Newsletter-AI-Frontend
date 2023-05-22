@@ -58,12 +58,17 @@ export default function HomeScreen() {
         <div>
           <span id="main-step-number">1</span>
           <span id="main-step-content">
-            Input the links in the following the articles:
+            Input the URL <span className="fw-bold">Links </span>to your source
+            articles
           </span>
         </div>
         <div>
           <span id="main-step-number">2</span>
-          <span id="main-step-content">Choose the tone</span>
+          <span id="main-step-content">
+            Choose the type of <span className="fw-bold">Summary </span>and your{" "}
+            <span className="fw-bold">Tone </span>
+            of voice
+          </span>
         </div>
         <div>
           <span id="main-step-number">3</span>

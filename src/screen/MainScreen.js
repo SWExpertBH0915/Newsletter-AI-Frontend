@@ -14,11 +14,45 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
 
+const tones_temps = [
+  "Serious",
+  "Humour",
+  "Education",
+  "Authoritative",
+  "Friendly",
+  "Sarastic",
+  "Calm",
+  "Enthusiastic",
+  "Formal",
+  "Whimsical",
+  "Humourous",
+  "Inquistive"
+];
+const tones_contents = {
+  Serious: ["Serious", "tones-index-1", "😶"],
+  Humour: ["Humour", "tones-index-2", "😄"],
+  Education: ["Education", "tones-index-3", "🎓"],
+  Authoritative: ["Authoritative", "tones-index-4", "👮‍♂️"],
+  Friendly: ["Friendly", "tones-index-5", "🤗"],
+  Sarastic: ["Sarastic", "tones-index-6", "😒"],
+  Calm: ["Calm", "tones-index-7", "😌"],
+  Enthusiastic: ["Enthusiastic", "tones-index-8", "😃"],
+  Formal: ["Formal", "tones-index-9", "😐"],
+  Whimsical: ["Whimsical", "tones-index-10", "😜"],
+  Humourous: ["Humourous", "tones-index-11", "😆"],
+  Inquistive: ["Inquistive", "tones-index-12", "🤔"]
+};
+const styles_temps = [
+  ["Bullet Point Style", "styles-index-1", "bullet style with 6 points"],
+  ["Short Paragraph Style", "styles-index-2", "2 paragraphs style"],
+  ["Long Paragraph Style", "styles-index-3", "4 paragraphs style"]
+];
+
 export default function MainScreen() {
   const [newsurl, setNewsurl] = useState("");
 
-  const [styles, setStyles] = useState("bullet point style");
-  const [tones, setTones] = useState("authoritative");
+  const [styles, setStyles] = useState(styles_temps[0][2]);
+  const [tones, setTones] = useState(tones_temps[0]);
 
   const initailData = [
     {
@@ -93,6 +127,7 @@ export default function MainScreen() {
   const handelOnChangeStyle = (val) => setStyles(val);
 
   const { user: currentUser } = useSelector((state) => state.auth);
+
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
@@ -157,8 +192,9 @@ export default function MainScreen() {
             </span>
             :
           </label>
+
           <ToggleButtonGroup
-            className="btn d-flex flex-wrap justify-content-between align-items-center"
+            className="btn d-flex flex-wrap justify-content-between align-items-center gap-2"
             type="radio"
             name="style-opetions"
             size="sm"
@@ -166,66 +202,37 @@ export default function MainScreen() {
             onChange={handelOnChangeStyle}
             style={{ paddingLeft: "0px" }}
           >
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-11"
-              value="bullet point style"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Bullet Point Style
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-12"
-              value="short paragraph style"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Short Paragraph Style
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-13"
-              value="long paragraph style"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Long Paragraph Style
-            </ToggleButton>
+            {styles_temps.map((style_temp, index) => (
+              <ToggleButton
+                variant="outline-light"
+                id={style_temp[1]}
+                key={index}
+                value={style_temp[2]}
+                style={{
+                  borderRadius: "21px",
+                  marginRight: "5vh",
+                  width: "25vh",
+                  height: "auto",
+                  fontSize: "15px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px"
+                }}
+              >
+                {style_temp[0]}
+              </ToggleButton>
+            ))}
           </ToggleButtonGroup>
           <label style={{ fontSize: "25px" }}>
             Choose{" "}
             <span style={{ fontWeight: "bolder", color: "#07874d" }}>
               tone{" "}
             </span>
-            :
+            :{"  "}
+            <span style={{ fontSize: "30px" }}>{tones_contents[tones][2]}</span>
           </label>
+          {/* <div style={{ fontSize: "30px" }}>{tones_contents[tones][2]}</div> */}
           <ToggleButtonGroup
-            className="btn d-flex justify-content-center flex-wrap align-items-center"
+            className="btn d-flex justify-content-center flex-wrap align-items-center gap-2"
             type="radio"
             name="tone-options"
             size="sm"
@@ -233,175 +240,25 @@ export default function MainScreen() {
             onChange={handelOnChangeTone}
             style={{ paddingLeft: "0px" }}
           >
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-1"
-              value="authoritative"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Authoritative
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-2"
-              value="friendly"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Friendly
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-3"
-              value="sarcastic"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Sarcastic
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-4"
-              value="calm"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Calm
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-5"
-              value="enthusiastic"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Enthusiastic
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-6"
-              value="formal"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Formal
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-7"
-              value="whimsical"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Whimsical
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-8"
-              value="humourous"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Humourous
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-9"
-              value="inquisitive"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Inquisitive
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-10"
-              value="whith Emoji's"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Whith Emoji's
-            </ToggleButton>
+            {tones_temps.map((tones_temp, index) => (
+              <ToggleButton
+                variant="outline-light"
+                id={tones_contents[tones_temp][1]}
+                key={index}
+                value={tones_contents[tones_temp][0]}
+                style={{
+                  borderRadius: "21px",
+                  marginRight: "5vh",
+                  width: "25vh",
+                  height: "auto",
+                  fontSize: "15px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px"
+                }}
+              >
+                {tones_temp}
+              </ToggleButton>
+            ))}
           </ToggleButtonGroup>
         </div>
       </div>
@@ -430,7 +287,7 @@ export default function MainScreen() {
               variant="success"
               type="submit"
               onClick={handleOnClick}
-              style={{ borderRadius: "20px" }}
+              style={{ borderRadius: "20px", width: "20vh" }}
             >
               Submit
             </Button>
@@ -548,7 +405,7 @@ export default function MainScreen() {
                       }}
                     >
                       <Image
-                        className="img-fluid img-thumbnail rounded mx-auto d-block"
+                        className="img-fluid img-thumbnail rounded mx-auto d-block p-3 bg-transparent border-0"
                         src={item.imgurl}
                         alt={blankimg}
                       ></Image>
