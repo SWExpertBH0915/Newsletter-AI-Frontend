@@ -29,7 +29,7 @@ export default function ProfileScreen() {
   }
   return (
     <div style={{ height: "18vh" }}>
-      <div className="main-header home-main bg-black mb-0 bg-gradient py-3">
+      <div className="home-main bg-black mb-0 bg-gradient py-3">
         <Header />
       </div>
       <div className="bg-black" style={{ height: "110vh" }}>
@@ -80,54 +80,16 @@ export default function ProfileScreen() {
             >
               $19.95 for a month
             </ToggleButton>
-
-            {/* <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-12"
-              value={80}
-              style={{
-                borderRadius: "21px",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              $80 for 3 months
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-13"
-              value={150}
-              style={{
-                borderRadius: "21px",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              %150 for 6 months
-            </ToggleButton> */}
           </ToggleButtonGroup>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-5">
-          {/* <Button onClick={handleShow} variant="secondary" size="md">
-            Pay Now
-          </Button> */}
-          {/* <Button
-            href="https://buy.stripe.com/4gw9CQ2Wj5ZCh209AA"
+          <Button
+            href="/payment"
             target="_blank"
-            rel="noreferrer"
             variant="secondary"
             size="md"
+            style={{ background: "bottom" }}
           >
-            Pay Now
-          </Button> */}
-          <Button href="/payment" target="_blank" variant="secondary" size="md">
             Pay Now
           </Button>
           <Modal show={show} onHide={handleClose}>

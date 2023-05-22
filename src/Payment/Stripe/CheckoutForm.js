@@ -1,3 +1,4 @@
+import "./Stripe.css";
 import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
@@ -5,6 +6,8 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -15,7 +18,8 @@ export default function CheckoutForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleOnEmail = (val) => setEmail(val);
-
+  const { user: currentUser } = useSelector((state) => state.auth);
+  console.log(process.env.REACT_APP_BASEURL);
   useEffect(() => {
     if (!stripe) {
       return;
@@ -29,22 +33,28 @@ export default function CheckoutForm() {
       return;
     }
 
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
-          break;
-        case "processing":
-          setMessage("Your payment is processing.");
-          break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
-          break;
-        default:
-          setMessage("Something went wrong.");
-          break;
-      }
-    });
+    stripe
+      .retrievePaymentIntent(clientSecret)
+      .then(async ({ paymentIntent }) => {
+        switch (paymentIntent.status) {
+          case "succeeded":
+            const res = await axios.get(
+              process.env.REACT_APP_BASEURL + currentUser.id
+            );
+            setMessage(res.data.message);
+
+            break;
+          case "processing":
+            setMessage("Your payment is processing.");
+            break;
+          case "requires_payment_method":
+            setMessage("Your payment was not successful, please try again.");
+            break;
+          default:
+            setMessage("Something went wrong.");
+            break;
+        }
+      });
   }, [stripe]);
 
   const handleSubmit = async (e) => {
@@ -62,7 +72,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/payment",
+        return_url: process.env.REACT_APP_BASEURL + "/profile",
         receipt_email: email
       }
     });

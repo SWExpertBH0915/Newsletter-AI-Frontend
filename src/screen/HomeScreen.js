@@ -1,3 +1,4 @@
+import "./HomeScreen.css";
 import React from "react";
 import Header from "../components/Header";
 
@@ -5,10 +6,12 @@ import newsImg1 from "../img/news1.png";
 import newsImg2 from "../img/news2.png";
 import newsImg3 from "../img/news3.png";
 import { ReactComponent as LogoIcon } from "../img/icon.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function HomeScreen() {
+  const navigate = useNavigate();
   return (
-    <div className="main-header home-main bg-black mb-0 bg-gradient py-3">
+    <div className="home-main bg-black mb-0 bg-gradient py-3">
       <div style={{ height: "18vh" }}>
         <Header />
       </div>
@@ -53,41 +56,56 @@ export default function HomeScreen() {
       </div>
       <div className="main-step">
         <div>
-          <span id="main-step-nupmber">1</span>
+          <span id="main-step-number">1</span>
           <span id="main-step-content">
             Input the links in the following the articles:
           </span>
         </div>
         <div>
-          <span id="main-step-nupmber">2</span>
-          <span id="main-step-content">Choose the tone:</span>
+          <span id="main-step-number">2</span>
+          <span id="main-step-content">Choose the tone</span>
         </div>
         <div>
-          <span id="main-step-nupmber">3</span>
+          <span id="main-step-number">3</span>
           <span id="main-step-content">
             Hit <span className="fw-bold">"Submit"</span> and let our little
             robots do their thing
           </span>
         </div>
       </div>
-      <div className="main-foot">
-        <div
-          className="d-flex justify-content-center"
-          style={{ marginRight: "15%" }}
+      <div className="d-flex justify-content-center align-items-center mt-4">
+        <button
+          className="header-btn btn btn-md btn-success rounded-5"
+          style={{ width: "20vh" }}
+          onClick={() => {
+            navigate("/login");
+          }}
         >
+          GET STARTED
+        </button>
+      </div>
+
+      <div className="main-foot">
+        <div className="home-bugleai-div" style={{ marginRight: "15%" }}>
           <div id="main-vector-img">
             <LogoIcon />
           </div>
-          <label className="text-white fs-2 mt-0 ms-2">BUGLE AI</label>
+          <label className="home-bugleai-text">BUGLE AI</label>
         </div>
         <div className="main-foot-items">
-          <div>Watch Demo</div>
-          <div>Getstarted</div>
-          <div>ContactUs</div>
+          <a className="text-white text-decoration-none" href="/demo">
+            Watch Demo
+          </a>
+          <a className="text-white text-decoration-none" href="/mainscreen">
+            Getstarted
+          </a>
+          <a className="text-white text-decoration-none" href="/contactus">
+            ContactUs
+          </a>
         </div>
       </div>
       <div className="footer">
-        <h3 className="text-white fs-6 pt-1 pb-5">
+        <h3 className="home-footer-reserve text-white fs-6 pt-1 pb-5">
           @Bugle AI 2023, all rights reserved
         </h3>
       </div>

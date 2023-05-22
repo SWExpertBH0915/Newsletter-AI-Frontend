@@ -1,3 +1,4 @@
+import "./MainScreen.css";
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import blankimg from "../img/blank.png";
@@ -10,10 +11,7 @@ import Form from "react-bootstrap/Form";
 import { Col, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
 import Header from "../components/Header";
-import { colors } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export default function MainScreen() {
@@ -73,8 +71,8 @@ export default function MainScreen() {
           tones: tones
         };
         setLoading(true);
-        console.log(BASE_URL + "/article");
         const res = await axios.post(BASE_URL + "/article", body);
+        console.log(res.data);
         setData(res.data.result);
         setTotalsum(res.data.totalreulst);
         setLoading(false);
@@ -103,7 +101,7 @@ export default function MainScreen() {
     return <Navigate to="/profile" />;
   }
   return (
-    <div className="main-header home-main bg-black mb-0 bg-gradient py-3">
+    <div className="home-main bg-black mb-0 bg-gradient py-3">
       <div style={{ height: "18vh" }}>
         <Header />
       </div>

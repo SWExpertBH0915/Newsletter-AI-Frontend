@@ -13,6 +13,8 @@ import ProfileScreen from "./screen/ProfileScreen";
 import Payment from "./Payment/Stripe/Payment";
 import AuthVerify from "./common/AuthVerify";
 import { logout } from "./actions/auth";
+import ContactUs from "./screen/ContactUs";
+import VideoPlayer from "./components/VideoPlayer";
 // import StripePay from "./Payment/StripePay";
 
 function App() {
@@ -55,6 +57,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         {/* <Route path="/stripepay" element={<StripePay />} /> */}
         <Route path="/payment" element={<Payment />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/demo" element={<VideoPlayer />} />
       </Routes>
       <AuthVerify logOut={logOut} />
     </div>

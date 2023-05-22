@@ -1,0 +1,72 @@
+.header-homeicon {
+    width: 40px;
+    height: 40px;
+    color: white;
+    margin-right: 10px;
+}
+#header-avatar-user {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #198754;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } 
+#header-avatar-user:hover {
+    opacity: 50%;
+}
+#header-avatar-drop {
+    width: 25px;
+    height: auto;
+}
+#header-avatar-drop:hover {
+    opacity: 50%;
+}
+
+.main-header button{
+    width:  180px;
+    font-family: "Segoe UI";
+}
+
+#btn-contact {
+    margin-left: 80px;
+}
+
+.dropdown-toggle::after {
+    display: none!important;
+  }
+  
+.dropdown-menu {
+    transform: translate(30px, 70px)!important;
+}
+
+.dropdown-item:hover {
+    background-color: #1c2027!important;
+}
+.main-foot-items {
+    color: white;
+}
+@media screen and (max-width: 920px) {
+    #header-avatar-user {
+        display:none
+    }
+    .dropdown-menu.show {
+        display: none !important;
+    }
+    .header-btn {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 921px) {
+    #header-avatar-drop {
+      display: none;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    #btn-contact {
+      margin-left:20px;
+    }
+}

@@ -1,9 +1,8 @@
 .paymentApp {
-    display: flex;
-    align-items: center;
-  }
-  
-body {
+  display: flex;
+  align-items: center;
+}
+#payment-body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -13,8 +12,7 @@ body {
   height: 100vh;
   width: 100vw;
 }
-
-.payment-form {
+#payment-form {
   width: 30vw;
   min-width: 500px;
   align-self: center;
@@ -24,7 +22,7 @@ body {
   padding: 40px;
 }
 
-#email {
+/* #link-authentication-element {
   border-radius: 6px;
   margin-bottom: 16px;
   padding: 12px;
@@ -34,22 +32,16 @@ body {
   width: 100%;
   background: white;
   box-sizing: border-box;
-}
+} */
 
-#payment-message {
-  color: rgb(105, 115, 134);
-  font-size: 16px;
-  line-height: 20px;
-  padding-top: 12px;
-  text-align: center;
-}
+
 
 #payment-element {
   margin-bottom: 24px;
 }
 
 /* Buttons and links */
-button {
+#submit {
   background: #5469d4;
   font-family: Arial, sans-serif;
   color: #ffffff;
@@ -65,11 +57,11 @@ button {
   width: 100%;
 }
 
-button:hover {
+#submit:hover {
   filter: contrast(115%);
 }
 
-button:disabled {
+#submit:disabled {
   opacity: 0.5;
   cursor: default;
 }
@@ -127,19 +119,17 @@ button:disabled {
   animation: loading 2s infinite ease;
 }
 
-@keyframes loading {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+
+#payment-message {
+  color: rgb(105, 115, 134);
+  font-size: 16px;
+  line-height: 20px;
+  padding-top: 12px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
-  form {
+  #payment-form {
     width: 80vw;
     min-width: initial;
   }
