@@ -45,7 +45,6 @@ export default function Adminboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(BASE_URL + "/all"); // Replace '/api/users' with your API endpoint
-        console.log("~~~~~~~~~~~~~~~~~~~~~~", response.data);
         setUsers(response.data); // Assuming the response contains an array of users
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -62,11 +61,12 @@ export default function Adminboard() {
     window.location.reload();
   };
 
+  const handleAdd = async () => {};
+
   const handleSaveChanges = async () => {
     const body = {
       username: username,
       email: email,
-      roles: [role],
       expiredate: expiredate
     };
     const res = await axios.put(BASE_URL + `/update/${userID}`, body);
@@ -86,7 +86,21 @@ export default function Adminboard() {
       <div style={{ height: "18vh" }}>
         <Header />
         <div style={{ marginTop: "20vh" }}>
-          <h2>User Administration</h2>
+          <div>
+            <h2 className="d-flex justify-content-start align-content-center">
+              Admin
+            </h2>
+            {/* <div className="d-flex justify-content-end align-content-center">
+              <Button
+                style={{ width: "15vh" }}
+                onClick={() => {
+                  setShow(true);
+                }}
+              >
+                Add
+              </Button>
+            </div> */}
+          </div>
           <div>
             <Table responsive="sm">
               <thead>
@@ -127,11 +141,6 @@ export default function Adminboard() {
               </tbody>
             </Table>
           </div>
-          {/* <UserAdminTable
-            users={users}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          /> */}
         </div>
       </div>
       <Modal show={show} onHide={handleClose}>

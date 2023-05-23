@@ -111,6 +111,9 @@ export default function UserinfoModal({ isOpen, onClose }) {
             <div>
               <div className="fs-5 text-center mb-3 text-white">
                 <a href="/profile">User Info</a>
+                <div>
+                  <a href="/admin">Admin</a>
+                </div>
                 <div className="mt-3" onClick={logOut}>
                   LogOut
                 </div>
