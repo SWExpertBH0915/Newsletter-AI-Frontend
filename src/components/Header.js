@@ -39,7 +39,6 @@ export default function Header() {
     setIsOpen(false);
   };
 
-  console.log(currentUser);
   return (
     <div className="main-header row pt-1 p-0 m-0">
       <div className="col-8 p-0 d-flex justify-content-start align-items-center">

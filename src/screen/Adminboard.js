@@ -61,8 +61,6 @@ export default function Adminboard() {
     window.location.reload();
   };
 
-  const handleAdd = async () => {};
-
   const handleSaveChanges = async () => {
     const body = {
       username: username,
@@ -90,16 +88,6 @@ export default function Adminboard() {
             <h2 className="d-flex justify-content-start align-content-center">
               Admin
             </h2>
-            {/* <div className="d-flex justify-content-end align-content-center">
-              <Button
-                style={{ width: "15vh" }}
-                onClick={() => {
-                  setShow(true);
-                }}
-              >
-                Add
-              </Button>
-            </div> */}
           </div>
           <div>
             <Table responsive="sm">
@@ -119,14 +107,14 @@ export default function Adminboard() {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.expiredate}</td>
-                    <td className="d-flex flex-column justify-content-center, align-content-center">
+                    <td className="d-flex justify-content-start align-content-center">
                       <div
                         onClick={() =>
                           handleEdit(
                             user.id,
                             user.username,
                             user.email,
-                            expiredate
+                            user.expiredate
                           )
                         }
                       >

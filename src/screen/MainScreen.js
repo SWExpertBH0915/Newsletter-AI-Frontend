@@ -43,7 +43,7 @@ const tones_contents = {
   Inquistive: ["Inquistive", "tones-index-12", "🤔"]
 };
 const styles_temps = [
-  ["Bullet Point Style", "styles-index-1", "bullet style with 6 points"],
+  ["Bullet Point Style", "styles-index-1", "bullet style with 4 points"],
   ["Short Paragraph Style", "styles-index-2", "2 paragraphs style"],
   ["Long Paragraph Style", "styles-index-3", "4 paragraphs style"]
 ];
@@ -53,6 +53,8 @@ export default function MainScreen() {
 
   const [styles, setStyles] = useState(styles_temps[0][2]);
   const [tones, setTones] = useState(tones_temps[0]);
+  const [withemoji, setWithemoji] = useState(false);
+  const [withimg, setWithimg] = useState(true);
 
   const initailData = [
     {
@@ -63,7 +65,7 @@ export default function MainScreen() {
     }
   ];
   const [data, setData] = useState(initailData);
-  const [totalsum, setTotalsum] = useState("");
+  // const [totalsum, setTotalsum] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -85,7 +87,6 @@ export default function MainScreen() {
   };
 
   const handleOnClick = async () => {
-    console.log("Click");
     setData([]);
     var urlCheck = [];
 
@@ -102,13 +103,13 @@ export default function MainScreen() {
         const body = {
           urls: urls,
           styles: styles,
-          tones: tones
+          tones: tones,
+          withimg: withimg
         };
         setLoading(true);
         const res = await axios.post(BASE_URL + "/article", body);
-        console.log(res.data);
         setData(res.data.result);
-        setTotalsum(res.data.totalreulst);
+        // setTotalsum(res.data.totalreulst);
         setLoading(false);
       } else {
         alert("Invalid URL");
@@ -222,15 +223,34 @@ export default function MainScreen() {
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
-          <label style={{ fontSize: "25px" }}>
-            Choose{" "}
-            <span style={{ fontWeight: "bolder", color: "#07874d" }}>
-              tone{" "}
-            </span>
-            :{"  "}
-            <span style={{ fontSize: "30px" }}>{tones_contents[tones][2]}</span>
-          </label>
-          {/* <div style={{ fontSize: "30px" }}>{tones_contents[tones][2]}</div> */}
+          <div className="d-flex flex-wrap justify-content-between align-items-center mt-3">
+            <label style={{ fontSize: "25px" }}>
+              Choose{" "}
+              <span style={{ fontWeight: "bolder", color: "#07874d" }}>
+                tone{" "}
+              </span>
+              :{"  "}
+            </label>
+            <ToggleButton
+              id="toggle-check"
+              type="checkbox"
+              variant="outline-success"
+              checked={withemoji}
+              value={false}
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "13vh",
+                height: "auto",
+                fontSize: "13px",
+                paddingTop: "5px",
+                paddingBottom: "5px"
+              }}
+              onChange={(e) => setWithemoji(e.currentTarget.checked)}
+            >
+              With Emoji
+            </ToggleButton>
+          </div>
           <ToggleButtonGroup
             className="btn d-flex justify-content-center flex-wrap align-items-center gap-2"
             type="radio"
@@ -242,6 +262,7 @@ export default function MainScreen() {
           >
             {tones_temps.map((tones_temp, index) => (
               <ToggleButton
+                className="d-flex justify-content-center flex-between align-items-center gap-4"
                 variant="outline-light"
                 id={tones_contents[tones_temp][1]}
                 key={index}
@@ -257,6 +278,9 @@ export default function MainScreen() {
                 }}
               >
                 {tones_temp}
+                <div style={{ fontSize: "15px" }}>
+                  {withemoji && <div>{tones_contents[tones_temp][2]}</div>}
+                </div>
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
@@ -276,13 +300,18 @@ export default function MainScreen() {
           and let our little robots do their thing
         </label>
         {loading ? (
-          <div className="d-flex justify-content-end mt-4">
-            <Button variant="warning" type="submit" disabled>
+          <div className="d-flex justify-content-start mt-4">
+            <Button
+              variant="warning"
+              type="submit"
+              style={{ borderRadius: "20px", width: "20vh" }}
+              disabled
+            >
               Loading..
             </Button>
           </div>
         ) : (
-          <div className="d-flex justify-content-start mt-4">
+          <div className="d-flex justify-content-between align-items-center mt-4">
             <Button
               variant="success"
               type="submit"
@@ -291,6 +320,24 @@ export default function MainScreen() {
             >
               Submit
             </Button>
+            <ToggleButton
+              id="toggle-check-img"
+              type="checkbox"
+              variant="outline-warning"
+              checked={withimg}
+              value={true}
+              style={{
+                borderRadius: "21px",
+                width: "13vh",
+                height: "auto",
+                fontSize: "13px",
+                paddingTop: "5px",
+                paddingBottom: "5px"
+              }}
+              onChange={(e) => setWithimg(e.currentTarget.checked)}
+            >
+              Images?
+            </ToggleButton>
           </div>
         )}
       </div>
@@ -387,41 +434,43 @@ export default function MainScreen() {
                       }}
                     />
                   </Form.Group>
-                  <Form.Group className="pt-3 fs-5">
-                    <Form.Label
-                      className="align-self-lg-start"
-                      column
-                      style={{ fontWeight: "bolder", color: "#07874d" }}
-                    >
-                      Image
-                    </Form.Label>
+                  {withimg && (
+                    <Form.Group className="pt-3 fs-5">
+                      <Form.Label
+                        className="align-self-lg-start"
+                        column
+                        style={{ fontWeight: "bolder", color: "#07874d" }}
+                      >
+                        Image
+                      </Form.Label>
 
-                    <div
-                      style={{
-                        borderColor: "white",
-                        border: "solid",
-                        borderRadius: "5vh",
-                        padding: "1vh"
-                      }}
-                    >
-                      <Image
-                        className="img-fluid img-thumbnail rounded mx-auto d-block p-3 bg-transparent border-0"
-                        src={item.imgurl}
-                        alt={blankimg}
-                      ></Image>
-                    </div>
-                  </Form.Group>
+                      <div
+                        style={{
+                          borderColor: "white",
+                          border: "solid",
+                          borderRadius: "5vh",
+                          padding: "1vh"
+                        }}
+                      >
+                        <Image
+                          className="img-fluid img-thumbnail rounded mx-auto d-block p-3 bg-transparent border-0"
+                          src={item.imgurl}
+                          alt={blankimg}
+                        ></Image>
+                      </div>
+                    </Form.Group>
+                  )}
                 </Form>
               </div>
             ))}
-            <div className="bg-transparent pt-3 pb-3">
+            {/* <div className="bg-transparent pt-3 pb-3">
               <Form.Group className="pt-3 pb-3 fs-5">
                 <Form.Label
                   className="align-self-lg-start"
                   column
                   style={{ fontWeight: "bolder", color: "#07874d" }}
                 >
-                  Contents
+                  Intro Summary Text
                 </Form.Label>
 
                 <Form.Control
@@ -438,7 +487,7 @@ export default function MainScreen() {
                   }}
                 />
               </Form.Group>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
