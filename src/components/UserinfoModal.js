@@ -81,7 +81,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
               <button
                 className="mt-4 btn btn-default fs-6 text-white border-white rounded-5 w-50"
                 onClick={() => {
-                  navigate("/mainscreen");
+                  navigate("/demo");
                 }}
               >
                 WATCH DEMO
@@ -89,24 +89,39 @@ export default function UserinfoModal({ isOpen, onClose }) {
               <button
                 className="mt-4 btn btn-default fs-6 text-white border-white rounded-5 w-50"
                 onClick={() => {
-                  navigate("/");
+                  navigate("/contactus");
                 }}
               >
                 Contact Us
               </button>
             </div>
           </div>
-          <div className="d-flex flex-column justify-content-center align-items-center">
-            <button
-              className="btn btn-md btn-success rounded-5"
-              style={{ marginTop: "5vh", marginBottom: "5vh" }}
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              GET STARTED
-            </button>
-          </div>
+          {currentUser && currentUser.isPayment ? (
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <button
+                className="btn btn-md btn-success rounded-5"
+                style={{ marginTop: "5vh", marginBottom: "5vh" }}
+                onClick={() => {
+                  navigate("/mainscreen");
+                }}
+              >
+                GET STARTED
+              </button>
+            </div>
+          ) : (
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <button
+                className="btn btn-md btn-success rounded-5"
+                style={{ marginTop: "5vh", marginBottom: "5vh" }}
+                onClick={() => {
+                  navigate("/paymentinfo");
+                }}
+              >
+                GET START FREE TRIAL
+              </button>
+            </div>
+          )}
+
           {currentUser && (
             <div>
               <div className="fs-5 text-center mb-3 text-white">
