@@ -54,7 +54,7 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       dispatch(login(username, password))
         .then(() => {
-          navigate("/mainscreen");
+          navigate("/");
           window.location.reload();
         })
         .catch(() => {
@@ -66,7 +66,7 @@ const Login = (props) => {
   };
 
   if (isLoggedIn) {
-    return <Navigate to="/mainscreen" />;
+    return <Navigate to="/" />;
   }
 
   return (

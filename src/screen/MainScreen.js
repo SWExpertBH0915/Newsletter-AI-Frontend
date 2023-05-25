@@ -133,8 +133,12 @@ export default function MainScreen() {
     return <Navigate to="/login" />;
   }
 
-  if (currentUser.expiredays <= 0) {
+  if (currentUser && currentUser.expiredays <= 0) {
     return <Navigate to="/profile" />;
+  }
+  if (currentUser && !currentUser.isPayment) {
+    alert("Verify your payment");
+    return <Navigate to="/paymentinfo" />;
   }
   return (
     <div className="home-main bg-black mb-0 bg-gradient py-3">
@@ -211,7 +215,8 @@ export default function MainScreen() {
                 value={style_temp[2]}
                 style={{
                   borderRadius: "21px",
-                  marginRight: "5vh",
+                  marginRight: "2vh",
+                  marginLeft: "2vh",
                   width: "25vh",
                   height: "auto",
                   fontSize: "15px",
@@ -269,7 +274,8 @@ export default function MainScreen() {
                 value={tones_contents[tones_temp][0]}
                 style={{
                   borderRadius: "21px",
-                  marginRight: "5vh",
+                  marginRight: "2vh",
+                  marginLeft: "2vh",
                   width: "25vh",
                   height: "auto",
                   fontSize: "15px",
@@ -453,7 +459,7 @@ export default function MainScreen() {
                         }}
                       >
                         <Image
-                          className="img-fluid img-thumbnail rounded mx-auto d-block p-3 bg-transparent border-0"
+                          className="img-fluid img-thumbnail rounded mx-auto d-block p-3 bg-transparent border-0 w-auto"
                           src={item.imgurl}
                           alt={blankimg}
                         ></Image>

@@ -3,7 +3,8 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  PAYMENT_VERIFIED
 } from "../actions/types";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -45,6 +46,12 @@ export default function (state = initialState, action) {
         isLoggedIn: false,
         user: null
       };
+    case PAYMENT_VERIFIED:
+      return {
+        ...state,
+        user: payload.user
+      };
+
     default:
       return state;
   }

@@ -17,25 +17,17 @@ export default function Adminboard() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [expiredate, setExpiredate] = useState();
-  const [role, setRole] = useState();
 
   const handleClose = () => setShow(false);
 
   const [users, setUsers] = useState([]);
 
-  const handleEdit = (
-    userId,
-    userName,
-    userEmail,
-    userExpireDate,
-    userRole
-  ) => {
+  const handleEdit = (userId, userName, userEmail, userExpireDate) => {
     // Logic to handle the edit action for the user with the specified ID
     setUserID(userId);
     setUsername(userName);
     setEmail(userEmail);
     setExpiredate(userExpireDate);
-    setRole(userRole);
 
     setShow(true);
     console.log(`Editing user with ID: ${userID}`);
@@ -57,7 +49,7 @@ export default function Adminboard() {
   const handleDelete = async (userId) => {
     // Logic to handle the delete action for the user with the specified ID
     const res = await axios.delete(BASE_URL + `/delete/${userId}`);
-    console.log(`Deleting user with ID: ${userId}`);
+    console.log(res);
     window.location.reload();
   };
 
@@ -67,7 +59,8 @@ export default function Adminboard() {
       email: email,
       expiredate: expiredate
     };
-    const res = await axios.put(BASE_URL + `/update/${userID}`, body);
+    const res1 = await axios.put(BASE_URL + `/update/${userID}`, body);
+    console.log(res1);
     setShow(false);
     window.location.reload();
   };
@@ -94,10 +87,16 @@ export default function Adminboard() {
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Name</th>
+                  <th>Username</th>
                   <th>Email</th>
                   <th>ExpireDate</th>
-                  <th>Actions</th>
+                  <th>Card number</th>
+                  <th>EXP</th>
+                  <th>CVC</th>
+                  <th>Country</th>
+                  <th>PaymentVerify</th>
+                  <th>CreatedAt</th>
+                  <th>UpdatedAt</th>
                 </tr>
               </thead>
               <tbody>
@@ -107,6 +106,13 @@ export default function Adminboard() {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.expiredate}</td>
+                    <td>{user.cardnumber}</td>
+                    <td>{user.cardnumber}</td>
+                    <td>{user.cvc}</td>
+                    <td>{user.country}</td>
+                    <td>{user.isPayment.toString()}</td>
+                    <td>{user.createdAt}</td>
+                    <td>{user.updatedAt}</td>
                     <td className="d-flex justify-content-start align-content-center">
                       <div
                         onClick={() =>

@@ -58,15 +58,27 @@ export default function Header() {
           >
             WATCH DEMO
           </button>
-          <button
-            className="header-btn btn btn-md btn-success rounded-5"
-            style={{}}
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            GET STARTED
-          </button>
+          {currentUser && currentUser.isPayment ? (
+            <button
+              className="header-btn btn btn-md btn-success rounded-5"
+              style={{}}
+              onClick={() => {
+                navigate("/mainscreen");
+              }}
+            >
+              GET STARTED
+            </button>
+          ) : (
+            <button
+              className="header-btn btn btn-md btn-success rounded-5"
+              style={{}}
+              onClick={() => {
+                navigate("/paymentinfo");
+              }}
+            >
+              GET START FREE TRIAL
+            </button>
+          )}
         </div>
       </div>
 

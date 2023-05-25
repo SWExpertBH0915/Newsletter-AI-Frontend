@@ -16,6 +16,7 @@ import { logout } from "./actions/auth";
 import ContactUs from "./screen/ContactUs";
 import VideoPlayer from "./components/VideoPlayer";
 import Adminboard from "./screen/Adminboard";
+import PaymentInfo from "./screen/PaymentInfo";
 // import StripePay from "./Payment/StripePay";
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/demo" element={<VideoPlayer />} />
         <Route path="/admin" element={<Adminboard />} />
+        <Route path="/paymentinfo" element={<PaymentInfo />} />
       </Routes>
       <AuthVerify logOut={logOut} />
     </div>

@@ -12,6 +12,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  font-size: 70px;
+  font-family: "Segoe UI";
+  font-weight: bold;
+  height: 50vh;
+  width: 50%;
 }
 
 .image-stack {
@@ -122,13 +127,6 @@
   height: 50px;
 }
 
-.main-body-text {
-  font-size: 70px;
-  font-family: "Segoe UI";
-  font-weight: bold;
-  height: 50vh;
-  width: 50%;
-}
 
 .main-site-text {
   font-size: 30px;
@@ -160,6 +158,9 @@
     font-size: 43px;
     margin-left: 0%;
     align-self: center;
+
+    align-items: center;
+    width: 100%;
   }
 }
 
@@ -176,10 +177,10 @@
     justify-content: center;
     align-items: center;
   }
-  .main-body-text {
+  /* .main-body-text {
     align-items: center;
     width: 100%;
-  }
+  } */
   .image-stack {
     justify-content: center;
     margin: 0px;
@@ -202,9 +203,6 @@
   #main-vector-img {
     display: none;
   }
-  .home-bugleai-text {
-    margin-right: 0%;
-  }
   .main-foot-items {
     flex-direction: column;
     padding-left: 0px;
@@ -214,7 +212,8 @@
     margin-left: 0px;
   }
   .home-bugleai-text {
-    margin-left: 0px;
+    margin-left: 0%;
+    margin-right: 0%;
   }
   .home-footer-reserve {
     text-align: center;
