@@ -90,7 +90,6 @@ export default function Adminboard() {
                   <th>Username</th>
                   <th>Email</th>
                   <th>ExpireDate</th>
-                  <th>PaymentVerify</th>
                 </tr>
               </thead>
               <tbody>
@@ -100,7 +99,6 @@ export default function Adminboard() {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.expiredate}</td>
-                    <td>{user.isPayment.toString()}</td>
                     <td className="d-flex justify-content-start align-content-center">
                       <div
                         onClick={() =>
