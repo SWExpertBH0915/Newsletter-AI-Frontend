@@ -9,7 +9,7 @@ import { isEmail } from "validator";
 import { register } from "../actions/auth";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const required = (value) => {
   if (!value) {
@@ -88,8 +88,27 @@ const Register = () => {
 
     form.current.validateAll();
 
+    // console.log(localStorage.getItem("subscription"));
+    const subscription = JSON.parse(localStorage.getItem("subscription"));
+    let subscriptionId = "";
+    let subscriptionStatus = "";
+    if (subscription) {
+      subscriptionId = subscription.id;
+      subscriptionStatus = subscription.status;
+    }
+    // console.log(subscription);
+
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password, roles))
+      dispatch(
+        register(
+          username,
+          email,
+          password,
+          roles,
+          subscriptionId,
+          subscriptionStatus
+        )
+      )
         .then(() => {
           setSuccessful(true);
         })
@@ -99,6 +118,11 @@ const Register = () => {
     }
   };
 
+  const { isPayment } = useSelector((state) => state.auth);
+
+  if (!isPayment) {
+    return <Navigate to="/payment" />;
+  }
   return (
     <div className="col-md-12">
       <div className="card card-container">

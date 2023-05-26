@@ -10,8 +10,8 @@ import {
   ToggleButtonGroup
 } from "react-bootstrap";
 import { useState } from "react";
-import StripePay from "../Payment/StripePay";
-
+import axios from "axios";
+const BASE_URL = process.env.REACT_APP_BASEURL;
 export default function ProfileScreen() {
   const { user: currentUser } = useSelector((state) => state.auth);
   const [price, setPrice] = useState(30);
@@ -21,9 +21,41 @@ export default function ProfileScreen() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
+
+  const handleOnClick = async () => {
+    const res = await axios
+      .post(`${BASE_URL}/payment/cancel`, {
+        SUBSCRIPTION_ID: currentUser.subscriptionId
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    console.log(res.status);
+    if (res.status === 201) {
+      console.log(res.status);
+      const cancelstatus = res.data.result;
+      alert(cancelstatus);
+      await axios.put(`${BASE_URL}/api/update/${currentUser.id}`, {
+        subscriptionId: "",
+        subscriptionStatus: ""
+      });
+
+      await axios.get(`${BASE_URL}/api/test/user/${currentUser.id}`, {
+        headers: {
+          "x-access-token": currentUser.accessToken
+        }
+      });
+
+      window.location.reload();
+    } else {
+      alert("Try again");
+    }
+  };
+
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
+
   return (
     <div style={{ height: "18vh" }}>
       <div className="home-main bg-black mb-0 bg-gradient py-3">
@@ -46,7 +78,7 @@ export default function ProfileScreen() {
                   color: "#07874d"
                 }}
               >
-                {currentUser.expiredays}
+                {Math.floor(currentUser.expiredays)}
               </span>{" "}
               days
             </label>
@@ -75,24 +107,44 @@ export default function ProfileScreen() {
                 paddingBottom: "10px"
               }}
             >
-              $19.95 for a month
+              $19.95 per a month
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
-        <div className="d-flex justify-content-center align-items-center mt-5">
-          <Button
-            href="/payment"
-            target="_blank"
-            variant="secondary"
-            size="md"
-            style={{ background: "bottom" }}
-          >
-            Pay Now
-          </Button>
+        <div className="d-flex flex-column justify-content-center align-items-center mt-5">
+          <div className="mb-5">
+            <label className="text-white">
+              Payment process:{" "}
+              {currentUser.subscriptionStatus === "active" ? (
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <span className="mb-3 mt-1">Active</span>
+                  <botton
+                    className="btn btn-sm btn-outline-light"
+                    onClick={handleOnClick}
+                  >
+                    Cancel
+                  </botton>
+                </div>
+              ) : (
+                <span>Deactive</span>
+              )}
+            </label>
+          </div>
+          <div>
+            <Button
+              href="/payment"
+              target="_blank"
+              variant="secondary"
+              size="md"
+              style={{ background: "bottom" }}
+            >
+              Pay Now
+            </Button>
+          </div>
+
           <Modal show={show} onHide={handleClose}>
-            <Modal.Body>
-              <StripePay price={price} />
-            </Modal.Body>
+            {/* <Modal.Body>
+            </Modal.Body> */}
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close

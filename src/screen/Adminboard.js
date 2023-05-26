@@ -90,13 +90,7 @@ export default function Adminboard() {
                   <th>Username</th>
                   <th>Email</th>
                   <th>ExpireDate</th>
-                  <th>Card number</th>
-                  <th>EXP</th>
-                  <th>CVC</th>
-                  <th>Country</th>
                   <th>PaymentVerify</th>
-                  <th>CreatedAt</th>
-                  <th>UpdatedAt</th>
                 </tr>
               </thead>
               <tbody>
@@ -106,13 +100,7 @@ export default function Adminboard() {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.expiredate}</td>
-                    <td>{user.cardnumber}</td>
-                    <td>{user.cardnumber}</td>
-                    <td>{user.cvc}</td>
-                    <td>{user.country}</td>
                     <td>{user.isPayment.toString()}</td>
-                    <td>{user.createdAt}</td>
-                    <td>{user.updatedAt}</td>
                     <td className="d-flex justify-content-start align-content-center">
                       <div
                         onClick={() =>

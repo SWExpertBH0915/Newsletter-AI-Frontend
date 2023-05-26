@@ -2,11 +2,21 @@ import axios from "axios";
 
 const API_URL = process.env.REACT_APP_BASEURL + "/auth/";
 
-const register = (username, email, password) => {
+const register = (
+  username,
+  email,
+  password,
+  roles,
+  subscriptionId,
+  subscriptionStatus
+) => {
   return axios.post(API_URL + "signup", {
     username,
     email,
-    password
+    password,
+    roles,
+    subscriptionId,
+    subscriptionStatus
   });
 };
 
@@ -27,6 +37,7 @@ const login = (username, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("subscription");
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

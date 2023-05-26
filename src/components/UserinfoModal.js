@@ -114,7 +114,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
                 className="btn btn-md btn-success rounded-5"
                 style={{ marginTop: "5vh", marginBottom: "5vh" }}
                 onClick={() => {
-                  navigate("/paymentinfo");
+                  navigate("/payment");
                 }}
               >
                 GET START FREE TRIAL

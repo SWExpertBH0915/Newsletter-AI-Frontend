@@ -10,13 +10,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileScreen from "./screen/ProfileScreen";
-import Payment from "./Payment/Stripe/Payment";
 import AuthVerify from "./common/AuthVerify";
 import { logout } from "./actions/auth";
 import ContactUs from "./screen/ContactUs";
 import VideoPlayer from "./components/VideoPlayer";
 import Adminboard from "./screen/Adminboard";
-import PaymentInfo from "./screen/PaymentInfo";
+import Payment from "./Payment/Payment";
 // import StripePay from "./Payment/StripePay";
 
 function App() {
@@ -57,12 +56,10 @@ function App() {
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/stripepay" element={<StripePay />} /> */}
         <Route path="/payment" element={<Payment />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/demo" element={<VideoPlayer />} />
         <Route path="/admin" element={<Adminboard />} />
-        <Route path="/paymentinfo" element={<PaymentInfo />} />
       </Routes>
       <AuthVerify logOut={logOut} />
     </div>
