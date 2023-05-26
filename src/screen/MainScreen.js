@@ -56,6 +56,8 @@ export default function MainScreen() {
   const [withemoji, setWithemoji] = useState(false);
   const [withimg, setWithimg] = useState(true);
 
+  const [resultEmoji, setResultEmoji] = useState("😶");
+
   const initailData = [
     {
       url: "",
@@ -87,6 +89,7 @@ export default function MainScreen() {
   };
 
   const handleOnClick = async () => {
+    setResultEmoji(tones_contents[tones][2]);
     setData([]);
     var urlCheck = [];
 
@@ -330,7 +333,7 @@ export default function MainScreen() {
             <ToggleButton
               id="toggle-check-img"
               type="checkbox"
-              variant="outline-warning"
+              variant="outline-success"
               checked={withimg}
               value={true}
               style={{
@@ -431,7 +434,11 @@ export default function MainScreen() {
                       className="fs-6 rounded-5"
                       as="textarea"
                       rows={8}
-                      value={item.content.trim()}
+                      value={
+                        withemoji
+                          ? item.content.trim() + resultEmoji
+                          : item.content.trim()
+                      }
                       disabled
                       style={{
                         color: "white",

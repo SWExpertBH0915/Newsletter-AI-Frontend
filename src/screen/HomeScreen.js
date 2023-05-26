@@ -7,12 +7,14 @@ import newsImg2 from "../img/news2.png";
 import newsImg3 from "../img/news3.png";
 import { ReactComponent as LogoIcon } from "../img/icon.svg";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function HomeScreen() {
   const navigate = useNavigate();
+  const { user: currentUser } = useSelector((state) => state.auth);
   return (
     <div className="home-main bg-black mb-0 bg-gradient py-3">
-      <div style={{ height: "18vh" }}>
+      <div style={{ height: "12vh" }}>
         <Header />
       </div>
       <div className="main-body text-white">
@@ -22,6 +24,31 @@ export default function HomeScreen() {
           </div>
           <div>
             <span className="text-success">Newsletters</span> with AI!
+          </div>
+          <div className="d-flex justify-content-center align-items-center w-100">
+            <div>
+              {currentUser ? (
+                <button
+                  className="btn btn-md btn-success rounded-5"
+                  style={{}}
+                  onClick={() => {
+                    navigate("/mainscreen");
+                  }}
+                >
+                  GET STARTED
+                </button>
+              ) : (
+                <button
+                  className="btn btn-md btn-success rounded-5"
+                  style={{}}
+                  onClick={() => {
+                    navigate("/payment");
+                  }}
+                >
+                  START FREE TRIAL
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -78,17 +105,31 @@ export default function HomeScreen() {
           </span>
         </div>
       </div>
-      <div className="d-flex justify-content-center align-items-center mt-4">
-        <button
-          className="header-btn btn btn-md btn-success rounded-5"
-          style={{ width: "20vh" }}
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          GET STARTED
-        </button>
-      </div>
+      {currentUser ? (
+        <div className="d-flex justify-content-center align-items-center mt-4">
+          <button
+            className="btn btn-md btn-success rounded-5"
+            style={{ width: "20vh" }}
+            onClick={() => {
+              navigate("/mainscreen");
+            }}
+          >
+            GET STARTED
+          </button>
+        </div>
+      ) : (
+        <div className="d-flex justify-content-center align-items-center mt-4">
+          <button
+            className="btn btn-md btn-success rounded-5"
+            style={{ width: "20vh" }}
+            onClick={() => {
+              navigate("/payment");
+            }}
+          >
+            START FREE TRIAL
+          </button>
+        </div>
+      )}
 
       <div className="main-foot">
         <div className="home-bugleai-div" style={{ marginRight: "15%" }}>
@@ -101,9 +142,15 @@ export default function HomeScreen() {
           <a className="text-white text-decoration-none" href="/demo">
             Watch Demo
           </a>
-          <a className="text-white text-decoration-none" href="/mainscreen">
-            Getstarted
-          </a>
+          {currentUser ? (
+            <a className="text-white text-decoration-none" href="/mainscreen">
+              Getstarted
+            </a>
+          ) : (
+            <a className="text-white text-decoration-none" href="/payment">
+              START FREE TRIAL
+            </a>
+          )}
           <a className="text-white text-decoration-none" href="/contactus">
             ContactUs
           </a>

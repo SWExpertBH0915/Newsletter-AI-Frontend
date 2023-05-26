@@ -77,13 +77,35 @@ export default function Header() {
                 navigate("/payment");
               }}
             >
-              GET START FREE TRIAL
+              START FREE TRIAL
             </button>
           )}
         </div>
       </div>
 
       <div className="col-4 p-0 d-flex justify-content-end align-items-center">
+        {currentUser ? (
+          <button
+            id="btn-contact"
+            className="header-btn btn btn-md btn-default text-white border-white rounded-5 me-5"
+            onClick={() => {
+              logOut();
+              navigate("/");
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            id="btn-contact"
+            className="header-btn btn btn-md btn-default text-white border-white rounded-5 me-5"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Login
+          </button>
+        )}
         <button
           id="btn-contact"
           className="header-btn btn btn-md btn-default text-white border-white rounded-5 me-5"

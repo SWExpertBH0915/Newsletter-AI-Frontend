@@ -96,7 +96,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
               </button>
             </div>
           </div>
-          {currentUser && currentUser.isPayment ? (
+          {currentUser ? (
             <div className="d-flex flex-column justify-content-center align-items-center">
               <button
                 className="btn btn-md btn-success rounded-5"
@@ -117,7 +117,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
                   navigate("/payment");
                 }}
               >
-                GET START FREE TRIAL
+                START FREE TRIAL
               </button>
             </div>
           )}

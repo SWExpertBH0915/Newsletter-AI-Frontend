@@ -78,7 +78,7 @@ export default function ProfileScreen() {
                   color: "#07874d"
                 }}
               >
-                {Math.floor(currentUser.expiredays)}
+                {Math.ceil(currentUser.expiredays)}
               </span>{" "}
               days
             </label>
