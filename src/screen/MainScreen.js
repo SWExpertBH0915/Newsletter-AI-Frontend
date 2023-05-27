@@ -258,7 +258,7 @@ export default function MainScreen() {
               }}
               onChange={(e) => setWithemoji(e.currentTarget.checked)}
             >
-              Without Emoji
+              With Emoji
             </ToggleButton>
           </div>
           <ToggleButtonGroup
@@ -290,7 +290,7 @@ export default function MainScreen() {
               >
                 {tones_temp}
                 <div style={{ fontSize: "15px" }}>
-                  {!withemoji && <div>{tones_contents[tones_temp][2]}</div>}
+                  {withemoji && <div>{tones_contents[tones_temp][2]}</div>}
                 </div>
               </ToggleButton>
             ))}
@@ -347,7 +347,7 @@ export default function MainScreen() {
               }}
               onChange={(e) => setWithimg(e.currentTarget.checked)}
             >
-              Without Images
+              With Images
             </ToggleButton>
           </div>
         )}
@@ -447,7 +447,7 @@ export default function MainScreen() {
                       }}
                     />
                   </Form.Group>
-                  {!withimg && (
+                  {withimg && (
                     <Form.Group className="pt-3 fs-5">
                       <Form.Label
                         className="align-self-lg-start"
