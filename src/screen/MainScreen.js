@@ -56,7 +56,7 @@ export default function MainScreen() {
   const [withemoji, setWithemoji] = useState(false);
   const [withimg, setWithimg] = useState(true);
 
-  const [resultEmoji, setResultEmoji] = useState("😶");
+  const [resultEmoji, setResultEmoji] = useState("");
 
   const initailData = [
     {
@@ -107,7 +107,8 @@ export default function MainScreen() {
           urls: urls,
           styles: styles,
           tones: tones,
-          withimg: withimg
+          withimg: withimg,
+          withemoji: withemoji
         };
         setLoading(true);
         const res = await axios.post(BASE_URL + "/article", body);
@@ -245,7 +246,7 @@ export default function MainScreen() {
               type="checkbox"
               variant="outline-success"
               checked={withemoji}
-              value={false}
+              value={true}
               style={{
                 borderRadius: "21px",
                 marginRight: "5vh",
@@ -257,7 +258,7 @@ export default function MainScreen() {
               }}
               onChange={(e) => setWithemoji(e.currentTarget.checked)}
             >
-              With Emoji
+              Without Emoji
             </ToggleButton>
           </div>
           <ToggleButtonGroup
@@ -289,7 +290,7 @@ export default function MainScreen() {
               >
                 {tones_temp}
                 <div style={{ fontSize: "15px" }}>
-                  {withemoji && <div>{tones_contents[tones_temp][2]}</div>}
+                  {!withemoji && <div>{tones_contents[tones_temp][2]}</div>}
                 </div>
               </ToggleButton>
             ))}
@@ -346,7 +347,7 @@ export default function MainScreen() {
               }}
               onChange={(e) => setWithimg(e.currentTarget.checked)}
             >
-              Images?
+              Without Images
             </ToggleButton>
           </div>
         )}
@@ -435,9 +436,7 @@ export default function MainScreen() {
                       as="textarea"
                       rows={8}
                       value={
-                        withemoji
-                          ? item.content.trim() + resultEmoji
-                          : item.content.trim()
+                        withemoji ? item.content.trim() : item.content.trim()
                       }
                       disabled
                       style={{
@@ -448,7 +447,7 @@ export default function MainScreen() {
                       }}
                     />
                   </Form.Group>
-                  {withimg && (
+                  {!withimg && (
                     <Form.Group className="pt-3 fs-5">
                       <Form.Label
                         className="align-self-lg-start"

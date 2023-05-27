@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PAYMENT_VERIFIED } from "../actions/types";
+import { LoadingButton } from "../screen/LoadingButton";
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -13,6 +14,8 @@ export default function Payment() {
   const [stripe, setStripe] = useState(null);
   const [card, setCard] = useState(null);
   const [cardemail, setCardemail] = useState("");
+
+  const [isloading, setIsloading] = useState(false);
 
   const { user: currentUser } = useSelector((state) => state.auth);
 
@@ -39,12 +42,14 @@ export default function Payment() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    setIsloading(true);
+
     if (stripe && card) {
       const { error, token } = await stripe.createToken(card);
 
       if (error) {
         setError(error.message);
-        alert(error);
+        alert(error.message);
       } else {
         stripeTokenHandler(token);
       }
@@ -73,6 +78,7 @@ export default function Payment() {
     } else {
       alert(res.data.result.message);
     }
+    setIsloading(false);
   };
 
   const handleOnEmail = (e) => {
@@ -111,9 +117,15 @@ export default function Payment() {
           </div>
         </div>
         <div className="d-flex justify-content-center align-items-center">
-          <button className="btn btn-success mt-5" type="submit">
-            Submit Payment
-          </button>
+          {isloading ? (
+            <button className="btn btn-warning mt-5" type="submit">
+              Loading...
+            </button>
+          ) : (
+            <button className="btn btn-success mt-5" type="submit">
+              Submit Payment
+            </button>
+          )}
         </div>
       </form>
     </div>
