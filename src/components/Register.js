@@ -1,90 +1,3 @@
-// import React, { useState } from "react";
-
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import { Button, Form } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-
-// const BASE_URL = process.env.REACT_APP_BASEURL;
-
-// export default function Register() {
-//   const navigate = useNavigate();
-//   const [username, setUsername] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const defaultRole = ["user"];
-//   const handleRegister = async (e) => {
-//     e.preventDefault();
-//     const body = {
-//       username: username,
-//       email: email,
-//       password: password,
-//       roles: defaultRole
-//     };
-//     try {
-//       // const res = await axios.post(BASE_URL + "/auth/signup", body);
-//       // alert(res.data.message);
-//       // navigate("/login");
-//     } catch (err) {
-//       console.log(err.response.data.message);
-//     }
-//   };
-//   return (
-//     <div className="bg-black text-white p-3 d-flex text-center min-vh-100 align-items-center justify-content-center">
-//       <Form
-//         className="login-formMedia"
-//         style={{
-//           padding: "2rem",
-//           border: "1px solid #ffffff",
-//           borderRadius: "20px"
-//         }}
-//       >
-//         <h2 className="text-center">Register</h2>
-//         <Form.Group className="mb-3" controlId="formBasicName">
-//           <Form.Label className="float-start">Username</Form.Label>
-//           <Form.Control
-//             type="text"
-//             onChange={(e) => setUsername(e.target.value)}
-//             placeholder="Enter your username..."
-//           />
-//         </Form.Group>
-//         <Form.Group className="mb-3" controlId="formBasicEmail">
-//           <Form.Label className="float-start">Email</Form.Label>
-//           <Form.Control
-//             type="email"
-//             onChange={(e) => setEmail(e.target.value)}
-//             placeholder="Enter your email..."
-//           />
-//         </Form.Group>
-//         <Form.Group className="mb-3" controlId="formBasicPassword">
-//           <Form.Label className="float-start">Password</Form.Label>
-//           <Form.Control
-//             type="password"
-//             onChange={(e) => setPassword(e.target.value)}
-//             placeholder="Enter your password"
-//           />
-//         </Form.Group>
-//         <Form.Group className="d-flex justify-content-end align-items-center pt-3">
-//           <Button variant="primary" onClick={handleRegister}>
-//             Register
-//           </Button>
-//         </Form.Group>
-//         <Form.Group>
-//           <Button
-//             className="btn btn-sm btn-white bg-black text-white border-0 text-decoration-underline mt-4"
-//             onClick={() => {
-//               navigate("/login");
-//             }}
-//           >
-//             Aleardy have an account? Login here
-//           </Button>
-//         </Form.Group>
-//       </Form>
-//     </div>
-//   );
-// }
-
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -96,7 +9,7 @@ import { isEmail } from "validator";
 import { register } from "../actions/auth";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const required = (value) => {
   if (!value) {
@@ -175,8 +88,27 @@ const Register = () => {
 
     form.current.validateAll();
 
+    // console.log(localStorage.getItem("subscription"));
+    const subscription = JSON.parse(localStorage.getItem("subscription"));
+    let subscriptionId = "";
+    let subscriptionStatus = "";
+    if (subscription) {
+      subscriptionId = subscription.id;
+      subscriptionStatus = subscription.status;
+    }
+    // console.log(subscription);
+
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password, roles))
+      dispatch(
+        register(
+          username,
+          email,
+          password,
+          roles,
+          subscriptionId,
+          subscriptionStatus
+        )
+      )
         .then(() => {
           setSuccessful(true);
         })
@@ -186,6 +118,11 @@ const Register = () => {
     }
   };
 
+  const { isPayment } = useSelector((state) => state.auth);
+
+  if (!isPayment) {
+    return <Navigate to="/payment" />;
+  }
   return (
     <div className="col-md-12">
       <div className="card card-container">
@@ -213,7 +150,7 @@ const Register = () => {
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <Input
-                  type="text"
+                  type="email"
                   className="form-control"
                   name="email"
                   value={email}

@@ -1,3 +1,4 @@
+import "./MainScreen.css";
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import blankimg from "../img/blank.png";
@@ -10,17 +11,52 @@ import Form from "react-bootstrap/Form";
 import { Col, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
 import Header from "../components/Header";
-import { colors } from "@mui/material";
 import { useSelector } from "react-redux";
+
+const tones_temps = [
+  "Serious",
+  "Humour",
+  "Education",
+  "Authoritative",
+  "Friendly",
+  "Sarastic",
+  "Calm",
+  "Enthusiastic",
+  "Formal",
+  "Whimsical",
+  "Humourous",
+  "Inquistive"
+];
+const tones_contents = {
+  Serious: ["Serious", "tones-index-1", "😶"],
+  Humour: ["Humour", "tones-index-2", "😄"],
+  Education: ["Education", "tones-index-3", "🎓"],
+  Authoritative: ["Authoritative", "tones-index-4", "👮‍♂️"],
+  Friendly: ["Friendly", "tones-index-5", "🤗"],
+  Sarastic: ["Sarastic", "tones-index-6", "😒"],
+  Calm: ["Calm", "tones-index-7", "😌"],
+  Enthusiastic: ["Enthusiastic", "tones-index-8", "😃"],
+  Formal: ["Formal", "tones-index-9", "😐"],
+  Whimsical: ["Whimsical", "tones-index-10", "😜"],
+  Humourous: ["Humourous", "tones-index-11", "😆"],
+  Inquistive: ["Inquistive", "tones-index-12", "🤔"]
+};
+const styles_temps = [
+  ["Bullet Point Style", "styles-index-1", "bullet style with 4 points"],
+  ["Short Paragraph Style", "styles-index-2", "2 paragraphs style"],
+  ["Long Paragraph Style", "styles-index-3", "4 paragraphs style"]
+];
 
 export default function MainScreen() {
   const [newsurl, setNewsurl] = useState("");
 
-  const [styles, setStyles] = useState("bullet point style");
-  const [tones, setTones] = useState("authoritative");
+  const [styles, setStyles] = useState(styles_temps[0][2]);
+  const [tones, setTones] = useState(tones_temps[0]);
+  const [withemoji, setWithemoji] = useState(false);
+  const [withimg, setWithimg] = useState(true);
+
+  const [resultEmoji, setResultEmoji] = useState("");
 
   const initailData = [
     {
@@ -31,11 +67,11 @@ export default function MainScreen() {
     }
   ];
   const [data, setData] = useState(initailData);
-  const [totalsum, setTotalsum] = useState("");
+  // const [totalsum, setTotalsum] = useState("");
 
   const [loading, setLoading] = useState(false);
 
-  const baseURL = process.env.REACT_APP_BASEURL;
+  const BASE_URL = process.env.REACT_APP_BASEURL;
 
   const isUrl = (str) => {
     const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -53,7 +89,7 @@ export default function MainScreen() {
   };
 
   const handleOnClick = async () => {
-    console.log("Click");
+    setResultEmoji(tones_contents[tones][2]);
     setData([]);
     var urlCheck = [];
 
@@ -70,12 +106,14 @@ export default function MainScreen() {
         const body = {
           urls: urls,
           styles: styles,
-          tones: tones
+          tones: tones,
+          withimg: withimg,
+          withemoji: withemoji
         };
         setLoading(true);
-        const res = await axios.post(baseURL + "/article", body);
+        const res = await axios.post(BASE_URL + "/article", body);
         setData(res.data.result);
-        setTotalsum(res.data.totalreulst);
+        // setTotalsum(res.data.totalreulst);
         setLoading(false);
       } else {
         alert("Invalid URL");
@@ -94,31 +132,24 @@ export default function MainScreen() {
   const handelOnChangeStyle = (val) => setStyles(val);
 
   const { user: currentUser } = useSelector((state) => state.auth);
+
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
 
-  if (currentUser.expiredays <= 0) {
-    return <Navigate to="/" />;
+  if (currentUser && currentUser.expiredays <= 0) {
+    return <Navigate to="/profile" />;
   }
+  // if (currentUser && !currentUser.isPayment) {
+  //   alert("Verify your payment");
+  //   return <Navigate to="/paymentinfo" />;
+  // }
+
   return (
-    <div className="main-header home-main bg-black mb-0 bg-gradient py-3">
+    <div className="home-main bg-black mb-0 bg-gradient py-3">
       <div style={{ height: "18vh" }}>
         <Header />
       </div>
-      {/* <div className="bg-black">
-        <Link to="/">
-          <FaHome
-            style={{
-              color: "white",
-              width: "2rem",
-              height: "2rem",
-              marginLeft: "2rem",
-              marginTop: "1rem"
-            }}
-          />
-        </Link> 
-      </div> */}
       <div>
         <div className="d-flex flex-column text-white">
           <label style={{ fontSize: "60px" }}>
@@ -171,8 +202,9 @@ export default function MainScreen() {
             </span>
             :
           </label>
+
           <ToggleButtonGroup
-            className="btn d-flex flex-wrap justify-content-between align-items-center"
+            className="btn d-flex flex-wrap justify-content-between align-items-center gap-2"
             type="radio"
             name="style-opetions"
             size="sm"
@@ -180,66 +212,57 @@ export default function MainScreen() {
             onChange={handelOnChangeStyle}
             style={{ paddingLeft: "0px" }}
           >
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-11"
-              value="bullet point style"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Bullet Point Style
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-12"
-              value="short paragraph style"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Short Paragraph Style
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-13"
-              value="long paragraph style"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Long Paragraph Style
-            </ToggleButton>
+            {styles_temps.map((style_temp, index) => (
+              <ToggleButton
+                variant="outline-light"
+                id={style_temp[1]}
+                key={index}
+                value={style_temp[2]}
+                style={{
+                  borderRadius: "21px",
+                  marginRight: "2vh",
+                  marginLeft: "2vh",
+                  width: "25vh",
+                  height: "auto",
+                  fontSize: "15px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px"
+                }}
+              >
+                {style_temp[0]}
+              </ToggleButton>
+            ))}
           </ToggleButtonGroup>
-          <label style={{ fontSize: "25px" }}>
-            Choose{" "}
-            <span style={{ fontWeight: "bolder", color: "#07874d" }}>
-              tone{" "}
-            </span>
-            :
-          </label>
+          <div className="d-flex flex-wrap justify-content-between align-items-center mt-3">
+            <label style={{ fontSize: "25px" }}>
+              Choose{" "}
+              <span style={{ fontWeight: "bolder", color: "#07874d" }}>
+                tone{" "}
+              </span>
+              :{"  "}
+            </label>
+            <ToggleButton
+              id="toggle-check"
+              type="checkbox"
+              variant="outline-success"
+              checked={withemoji}
+              value={true}
+              style={{
+                borderRadius: "21px",
+                marginRight: "5vh",
+                width: "13vh",
+                height: "auto",
+                fontSize: "13px",
+                paddingTop: "5px",
+                paddingBottom: "5px"
+              }}
+              onChange={(e) => setWithemoji(e.currentTarget.checked)}
+            >
+              With Emoji
+            </ToggleButton>
+          </div>
           <ToggleButtonGroup
-            className="btn d-flex justify-content-center flex-wrap align-items-center"
+            className="btn d-flex justify-content-center flex-wrap align-items-center gap-2"
             type="radio"
             name="tone-options"
             size="sm"
@@ -247,175 +270,30 @@ export default function MainScreen() {
             onChange={handelOnChangeTone}
             style={{ paddingLeft: "0px" }}
           >
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-1"
-              value="authoritative"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Authoritative
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-2"
-              value="friendly"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Friendly
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-3"
-              value="sarcastic"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Sarcastic
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-4"
-              value="calm"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Calm
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-5"
-              value="enthusiastic"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Enthusiastic
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-6"
-              value="formal"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Formal
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-7"
-              value="whimsical"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Whimsical
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-8"
-              value="humourous"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Humourous
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-9"
-              value="inquisitive"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Inquisitive
-            </ToggleButton>
-
-            <ToggleButton
-              variant="outline-light"
-              id="tbg-btn-10"
-              value="whith Emoji's"
-              style={{
-                borderRadius: "21px",
-                marginRight: "5vh",
-                width: "25vh",
-                height: "auto",
-                fontSize: "15px",
-                paddingTop: "10px",
-                paddingBottom: "10px"
-              }}
-            >
-              Whith Emoji's
-            </ToggleButton>
+            {tones_temps.map((tones_temp, index) => (
+              <ToggleButton
+                className="d-flex justify-content-center flex-between align-items-center gap-4"
+                variant="outline-light"
+                id={tones_contents[tones_temp][1]}
+                key={index}
+                value={tones_contents[tones_temp][0]}
+                style={{
+                  borderRadius: "21px",
+                  marginRight: "2vh",
+                  marginLeft: "2vh",
+                  width: "25vh",
+                  height: "auto",
+                  fontSize: "15px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px"
+                }}
+              >
+                {tones_temp}
+                <div style={{ fontSize: "15px" }}>
+                  {withemoji && <div>{tones_contents[tones_temp][2]}</div>}
+                </div>
+              </ToggleButton>
+            ))}
           </ToggleButtonGroup>
         </div>
       </div>
@@ -433,21 +311,44 @@ export default function MainScreen() {
           and let our little robots do their thing
         </label>
         {loading ? (
-          <div className="d-flex justify-content-end mt-4">
-            <Button variant="warning" type="submit" disabled>
+          <div className="d-flex justify-content-start mt-4">
+            <Button
+              variant="warning"
+              type="submit"
+              style={{ borderRadius: "20px", width: "20vh" }}
+              disabled
+            >
               Loading..
             </Button>
           </div>
         ) : (
-          <div className="d-flex justify-content-start mt-4">
+          <div className="d-flex justify-content-between align-items-center mt-4">
             <Button
               variant="success"
               type="submit"
               onClick={handleOnClick}
-              style={{ borderRadius: "20px" }}
+              style={{ borderRadius: "20px", width: "20vh" }}
             >
               Submit
             </Button>
+            <ToggleButton
+              id="toggle-check-img"
+              type="checkbox"
+              variant="outline-success"
+              checked={withimg}
+              value={true}
+              style={{
+                borderRadius: "21px",
+                width: "13vh",
+                height: "auto",
+                fontSize: "13px",
+                paddingTop: "5px",
+                paddingBottom: "5px"
+              }}
+              onChange={(e) => setWithimg(e.currentTarget.checked)}
+            >
+              With Images
+            </ToggleButton>
           </div>
         )}
       </div>
@@ -459,7 +360,7 @@ export default function MainScreen() {
           minHeight: "90vh"
         }}
       >
-        <div className="text-white fs-1 text-center">Reault</div>
+        <div className="text-white fs-1 text-center">Result</div>
         {loading ? (
           <div className="d-flex justify-content-center align-content-center">
             <Box sx={{ display: "flex" }}>
@@ -475,7 +376,7 @@ export default function MainScreen() {
                     <Form.Group className="pt-1 fs-5 w-50 me-2">
                       <Col>
                         <Form.Label
-                          className="align-self-lg-start fs-5"
+                          className="align-self-lg-start"
                           column
                           style={{ fontWeight: "bolder", color: "#07874d" }}
                         >
@@ -484,7 +385,7 @@ export default function MainScreen() {
                       </Col>
                       <Col className="align-self-center">
                         <Form.Control
-                          className="fs-5 rounded-5"
+                          className="fs-6 rounded-5"
                           value={item.url}
                           disabled
                           style={{
@@ -508,7 +409,7 @@ export default function MainScreen() {
                       </Col>
                       <Col className="align-self-center">
                         <Form.Control
-                          className="fs-5 rounded-5"
+                          className="fs-6 rounded-5"
                           value={item.headline}
                           disabled
                           style={{
@@ -534,7 +435,9 @@ export default function MainScreen() {
                       className="fs-6 rounded-5"
                       as="textarea"
                       rows={8}
-                      value={item.content.trim()}
+                      value={
+                        withemoji ? item.content.trim() : item.content.trim()
+                      }
                       disabled
                       style={{
                         color: "white",
@@ -544,41 +447,43 @@ export default function MainScreen() {
                       }}
                     />
                   </Form.Group>
-                  <Form.Group className="pt-3 fs-5">
-                    <Form.Label
-                      className="align-self-lg-start"
-                      column
-                      style={{ fontWeight: "bolder", color: "#07874d" }}
-                    >
-                      Image
-                    </Form.Label>
+                  {withimg && (
+                    <Form.Group className="pt-3 fs-5">
+                      <Form.Label
+                        className="align-self-lg-start"
+                        column
+                        style={{ fontWeight: "bolder", color: "#07874d" }}
+                      >
+                        Image
+                      </Form.Label>
 
-                    <div
-                      style={{
-                        borderColor: "white",
-                        border: "solid",
-                        borderRadius: "5vh",
-                        padding: "1vh"
-                      }}
-                    >
-                      <Image
-                        className="img-fluid img-thumbnail rounded mx-auto d-block"
-                        src={item.imgurl}
-                        alt={blankimg}
-                      ></Image>
-                    </div>
-                  </Form.Group>
+                      <div
+                        style={{
+                          borderColor: "white",
+                          border: "solid",
+                          borderRadius: "5vh",
+                          padding: "1vh"
+                        }}
+                      >
+                        <Image
+                          className="img-fluid img-thumbnail rounded mx-auto d-block p-3 bg-transparent border-0 w-auto"
+                          src={item.imgurl}
+                          alt={blankimg}
+                        ></Image>
+                      </div>
+                    </Form.Group>
+                  )}
                 </Form>
               </div>
             ))}
-            <div className="bg-transparent pt-3 pb-3">
+            {/* <div className="bg-transparent pt-3 pb-3">
               <Form.Group className="pt-3 pb-3 fs-5">
                 <Form.Label
                   className="align-self-lg-start"
                   column
                   style={{ fontWeight: "bolder", color: "#07874d" }}
                 >
-                  Contents
+                  Intro Summary Text
                 </Form.Label>
 
                 <Form.Control
@@ -595,7 +500,7 @@ export default function MainScreen() {
                   }}
                 />
               </Form.Group>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
