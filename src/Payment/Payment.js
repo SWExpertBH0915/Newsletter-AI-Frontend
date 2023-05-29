@@ -42,15 +42,15 @@ export default function Payment() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setIsloading(true);
-
     if (stripe && card) {
       const { error, token } = await stripe.createToken(card);
 
       if (error) {
         setError(error.message);
         alert(error.message);
+        setIsloading(false);
       } else {
+        setIsloading(true);
         stripeTokenHandler(token);
       }
     }
@@ -70,12 +70,22 @@ export default function Payment() {
       dispatch({
         type: PAYMENT_VERIFIED
       });
+
       if (currentUser) {
+        setIsloading(false);
         navigate("/profile");
       } else {
+        const endDate = new Date(res.data.result.current_period_end);
+        alert(
+          `${
+            res.data.result.items.data[0].price.unit_amount / 100
+          } usd charged. It will end on ${endDate}`
+        );
+        setIsloading(false);
         navigate("/register");
       }
     } else {
+      setIsloading(false);
       alert(res.data.result.message);
     }
     setIsloading(false);
