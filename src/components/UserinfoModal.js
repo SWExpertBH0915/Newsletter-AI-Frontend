@@ -114,7 +114,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
                 className="btn btn-md btn-success rounded-5"
                 style={{ marginTop: "5vh", marginBottom: "5vh" }}
                 onClick={() => {
-                  navigate("/payment");
+                  navigate(`${process.env.REACT_APP_PAYMENT_URL}`);
                 }}
               >
                 START FREE TRIAL

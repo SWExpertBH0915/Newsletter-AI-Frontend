@@ -15,7 +15,8 @@ import { logout } from "./actions/auth";
 import ContactUs from "./screen/ContactUs";
 import VideoPlayer from "./components/VideoPlayer";
 import Adminboard from "./screen/Adminboard";
-import Payment from "./Payment/Payment";
+// import Payment from "./Payment/Payment";
+import Warapper from "./Payment/Warapper";
 // import StripePay from "./Payment/StripePay";
 
 function App() {
@@ -56,7 +57,8 @@ function App() {
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/payment" element={<Payment />} />
+        {/* <Route path="/payment" element={<Payment />} /> */}
+        <Route path="/payment" element={<Warapper />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/demo" element={<VideoPlayer />} />
         <Route path="/admin" element={<Adminboard />} />

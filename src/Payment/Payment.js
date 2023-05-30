@@ -73,6 +73,11 @@ export default function Payment() {
       if (currentUser) {
         navigate("/profile");
       } else {
+        alert(
+          `Subscription ${res.data.result.status}\n ${
+            res.data.result.items.data[0].price.unit_amount / 100
+          }$ per month`
+        );
         navigate("/register");
       }
     } else {
