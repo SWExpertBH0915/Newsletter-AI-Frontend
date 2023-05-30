@@ -1,0 +1,19 @@
+.modal-user-info {
+    width: 80vh; /* Set your desired width */
+    height: 80vh; /* Set your desired height */
+    margin: auto;
+}
+#user-avata:hover {
+  opacity: 50%;
+}
+@media screen and (max-width:650px) {
+  .modal-user-info {
+    width:60vh;
+  }
+  .modal-content {
+    width:85%;
+  }
+  .modal-dialog-centered {
+    justify-content: center;
+  }
+}

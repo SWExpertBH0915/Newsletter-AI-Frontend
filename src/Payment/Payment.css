@@ -1,0 +1,22 @@
+#payment-form {
+    min-width: 350px;
+    min-height: 500px;
+    background-color: #F7F7F7;
+    padding: 20px 25px 30px;
+    margin: 0 auto 50px;
+    margin-top: 100px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 5px rgb(28 26 26 / 52%);
+}
+
+.payment-email label {
+    margin-right:20px;
+}
+
+.payment-email input {
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 6px;
+}

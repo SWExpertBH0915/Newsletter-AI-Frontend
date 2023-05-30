@@ -1,15 +1,5 @@
-.footer{
-  background-color: rgb(14, 14, 14);
-  color: azure;
-  text-align: center;
-  padding-bottom: 1rem;
+.home-main {
+  padding-left: 6.8%;
+  padding-right: 6%;
 }
-
-.mainscreen-header {
-  text-align: center;
-  font-size: 80px;
-  background-color: rgb(4, 56, 70);
-  color: aliceblue;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
+/* s */
