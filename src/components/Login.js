@@ -113,14 +113,14 @@ const Login = (props) => {
               )}
               <span>Login</span>
             </button>
-            <button
+            {/* <button
               className="btn btn-sm btn-white border-0 text-decoration-underline mt-4"
               onClick={() => {
                 navigate("/register");
               }}
             >
               Don't Have an account? Register here
-            </button>
+            </button> */}
           </div>
 
           {message && (

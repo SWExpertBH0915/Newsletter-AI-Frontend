@@ -25,7 +25,7 @@ export default function ProfileScreen() {
   const handleOnClick = async () => {
     const res = await axios
       .post(`${BASE_URL}/payment/cancel`, {
-        SUBSCRIPTION_ID: currentUser.subscriptionId
+        currentUser: currentUser
       })
       .catch((error) => {
         alert(error.message);
@@ -35,16 +35,20 @@ export default function ProfileScreen() {
       console.log(res.status);
       const cancelstatus = res.data.result;
       alert(cancelstatus);
-      await axios.put(`${BASE_URL}/api/update/${currentUser.id}`, {
-        subscriptionId: "",
-        subscriptionStatus: ""
-      });
+      // await axios.put(`${BASE_URL}/api/update/${currentUser.id}`, {
+      //   subscriptionId: "",
+      //   subscriptionStatus: ""
+      // });
 
-      await axios.get(`${BASE_URL}/api/test/user/${currentUser.id}`, {
-        headers: {
-          "x-access-token": currentUser.accessToken
-        }
-      });
+      const newUser = await axios
+        .get(`${BASE_URL}/test/user/${currentUser.id}`, {
+          headers: {
+            "x-access-token": currentUser.accessToken
+          }
+        })
+        .then((res) => {
+          localStorage.setItem("user", JSON.stringify(res.data));
+        });
 
       window.location.reload();
     } else {
@@ -132,7 +136,7 @@ export default function ProfileScreen() {
           </div>
           <div>
             <Button
-              href="/payment"
+              href={process.env.REACT_APP_PAYMENT_URL}
               target="_blank"
               variant="secondary"
               size="md"

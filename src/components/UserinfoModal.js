@@ -96,7 +96,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
               </button>
             </div>
           </div>
-          {currentUser ? (
+          {currentUser && currentUser.subscriptionStatus === "active" ? (
             <div className="d-flex flex-column justify-content-center align-items-center">
               <button
                 className="btn btn-md btn-success rounded-5"

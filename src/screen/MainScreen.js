@@ -140,10 +140,6 @@ export default function MainScreen() {
   if (currentUser && currentUser.expiredays <= 0) {
     return <Navigate to="/profile" />;
   }
-  // if (currentUser && !currentUser.isPayment) {
-  //   alert("Verify your payment");
-  //   return <Navigate to="/paymentinfo" />;
-  // }
 
   return (
     <div className="home-main bg-black mb-0 bg-gradient py-3">

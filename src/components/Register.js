@@ -88,27 +88,8 @@ const Register = () => {
 
     form.current.validateAll();
 
-    // console.log(localStorage.getItem("subscription"));
-    const subscription = JSON.parse(localStorage.getItem("subscription"));
-    let subscriptionId = "";
-    let subscriptionStatus = "";
-    if (subscription) {
-      subscriptionId = subscription.id;
-      subscriptionStatus = subscription.status;
-    }
-    // console.log(subscription);
-
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(
-        register(
-          username,
-          email,
-          password,
-          roles,
-          subscriptionId,
-          subscriptionStatus
-        )
-      )
+      dispatch(register(username, email, password, roles))
         .then(() => {
           setSuccessful(true);
         })
@@ -118,11 +99,6 @@ const Register = () => {
     }
   };
 
-  const { isPayment } = useSelector((state) => state.auth);
-
-  if (!isPayment) {
-    return <Navigate to="/payment" />;
-  }
   return (
     <div className="col-md-12">
       <div className="card card-container">

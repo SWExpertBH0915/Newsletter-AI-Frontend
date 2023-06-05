@@ -37,7 +37,6 @@ const login = (username, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
-  localStorage.removeItem("subscription");
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

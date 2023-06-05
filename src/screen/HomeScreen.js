@@ -27,7 +27,7 @@ export default function HomeScreen() {
           </div>
           <div className="d-flex justify-content-center align-items-center w-100">
             <div>
-              {currentUser ? (
+              {currentUser && currentUser.subscriptionStatus === "active" ? (
                 <button
                   className="btn btn-md btn-success rounded-5"
                   style={{}}
@@ -42,7 +42,7 @@ export default function HomeScreen() {
                   className="btn btn-md btn-success rounded-5"
                   style={{}}
                   onClick={() => {
-                    navigate("/payment");
+                    window.location.href = process.env.REACT_APP_PAYMENT_URL;
                   }}
                 >
                   START FREE TRIAL
@@ -105,7 +105,7 @@ export default function HomeScreen() {
           </span>
         </div>
       </div>
-      {currentUser ? (
+      {currentUser && currentUser.subscriptionStatus === "active" ? (
         <div className="d-flex justify-content-center align-items-center mt-4">
           <button
             className="btn btn-md btn-success rounded-5"
@@ -123,7 +123,7 @@ export default function HomeScreen() {
             className="btn btn-md btn-success rounded-5"
             style={{ width: "20vh" }}
             onClick={() => {
-              navigate("/payment");
+              window.location.href = process.env.REACT_APP_PAYMENT_URL;
             }}
           >
             START FREE TRIAL
@@ -142,12 +142,15 @@ export default function HomeScreen() {
           <a className="text-white text-decoration-none" href="/demo">
             Watch Demo
           </a>
-          {currentUser ? (
+          {currentUser && currentUser.subscriptionStatus === "active" ? (
             <a className="text-white text-decoration-none" href="/mainscreen">
               Getstarted
             </a>
           ) : (
-            <a className="text-white text-decoration-none" href="/payment">
+            <a
+              className="text-white text-decoration-none"
+              href={process.env.REACT_APP_PAYMENT_URL}
+            >
               START FREE TRIAL
             </a>
           )}

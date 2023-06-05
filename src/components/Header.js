@@ -38,7 +38,6 @@ export default function Header() {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const { isPayment } = useSelector((state) => state.auth);
 
   return (
     <div className="main-header row pt-1 p-0 m-0">
@@ -59,7 +58,7 @@ export default function Header() {
           >
             WATCH DEMO
           </button>
-          {currentUser ? (
+          {currentUser && currentUser.subscriptionStatus === "active" ? (
             <button
               className="header-btn btn btn-md btn-success rounded-5"
               style={{}}
@@ -74,7 +73,7 @@ export default function Header() {
               className="header-btn btn btn-md btn-success rounded-5"
               style={{}}
               onClick={() => {
-                navigate("/payment");
+                window.location.href = process.env.REACT_APP_PAYMENT_URL;
               }}
             >
               START FREE TRIAL
