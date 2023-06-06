@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Form from "react-validation/build/form";
@@ -59,9 +59,13 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
+  const [confirmpassword, setConfirmpassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const roles = ["user"];
 
   const { message } = useSelector((state) => state.message);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -81,14 +85,29 @@ const Register = () => {
     setPassword(password);
   };
 
+  const onChangeConPassword = (e) => {
+    e.preventDefault();
+    setConfirmpassword(e.target.value);
+  };
+
+  useEffect(() => {
+    if (password !== confirmpassword) {
+      setPasswordError("Passwords do not match");
+    } else {
+      // Password and confirm password match, do something
+      setPasswordError("");
+    }
+  }, [password, confirmpassword]);
+
   const handleRegister = (e) => {
     e.preventDefault();
 
     setSuccessful(false);
 
     form.current.validateAll();
-
-    if (checkBtn.current.context._errors.length === 0) {
+    if (passwordError) {
+      alert("Please confirm your password");
+    } else if (checkBtn.current.context._errors.length === 0) {
       dispatch(register(username, email, password, roles))
         .then(() => {
           setSuccessful(true);
@@ -102,6 +121,12 @@ const Register = () => {
   return (
     <div className="col-md-12">
       <div className="card card-container">
+        <label className="fs-3 fw-bolder text-center mb-2">
+          Welcome to the Bugle AI Club!
+        </label>
+        <label className="fs-5 fw-semibold text-center mb-3">
+          Thanks for joining us, please finish your account setup below
+        </label>
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
@@ -147,6 +172,24 @@ const Register = () => {
                 />
               </div>
 
+              <div className="form-group">
+                <label htmlFor="confirmpassword">Confirm Password</label>
+                <Input
+                  type="password"
+                  className="form-control"
+                  name="confirmpassword"
+                  value={confirmpassword}
+                  onChange={onChangeConPassword}
+                />
+                <div className="text-center w-100 p-2">
+                  {passwordError && (
+                    <span className="text-center bg-danger bg-opacity-50 mt-5 w-100 p-2">
+                      {passwordError}
+                    </span>
+                  )}
+                </div>
+              </div>
+
               <div className="form-group mt-3">
                 <button className="btn btn-primary btn-block float-end">
                   Sign Up
@@ -157,7 +200,7 @@ const Register = () => {
                     navigate("/login");
                   }}
                 >
-                  Aleardy have an account? Login here
+                  Already have an account? Login here
                 </button>
               </div>
             </div>
