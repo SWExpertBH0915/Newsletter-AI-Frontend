@@ -16,7 +16,7 @@ export default function Adminboard() {
   const [userID, setUserID] = useState();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [expiredate, setExpiredate] = useState();
+  const [expireDate, setExpireDate] = useState();
 
   const handleClose = () => setShow(false);
 
@@ -27,7 +27,7 @@ export default function Adminboard() {
     setUserID(userId);
     setUsername(userName);
     setEmail(userEmail);
-    setExpiredate(userExpireDate);
+    setExpireDate(userExpireDate);
 
     setShow(true);
     console.log(`Editing user with ID: ${userID}`);
@@ -57,7 +57,7 @@ export default function Adminboard() {
     const body = {
       username: username,
       email: email,
-      expiredate: expiredate
+      expireDate: expireDate
     };
     const res1 = await axios.put(BASE_URL + `/update/${userID}`, body);
     console.log(res1);
@@ -98,7 +98,7 @@ export default function Adminboard() {
                     <td>{user.id}</td>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
-                    <td>{user.expiredate}</td>
+                    <td>{user.expireDate}</td>
                     <td className="d-flex justify-content-start align-content-center">
                       <div
                         onClick={() =>
@@ -106,7 +106,7 @@ export default function Adminboard() {
                             user.id,
                             user.username,
                             user.email,
-                            user.expiredate
+                            user.expireDate
                           )
                         }
                       >
@@ -152,8 +152,8 @@ export default function Adminboard() {
               <Form.Label>ExpireDate</Form.Label>
               <Form.Control
                 type="date"
-                value={expiredate}
-                onChange={(e) => setExpiredate(e.target.value)}
+                value={expireDate}
+                onChange={(e) => setExpireDate(e.target.value)}
               />
             </Form.Group>
           </Form>
