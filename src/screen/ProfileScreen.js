@@ -131,20 +131,20 @@ export default function ProfileScreen() {
                   </botton>
                 </div>
               ) : (
-                <span>Deactive</span>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <span className="mb-3">Deactive</span>
+                  <Button
+                    href={process.env.REACT_APP_PAYMENT_URL}
+                    target="_blank"
+                    variant="secondary"
+                    size="md"
+                    style={{ background: "bottom" }}
+                  >
+                    Pay Now
+                  </Button>
+                </div>
               )}
             </label>
-          </div>
-          <div>
-            <Button
-              href={process.env.REACT_APP_PAYMENT_URL}
-              target="_blank"
-              variant="secondary"
-              size="md"
-              style={{ background: "bottom" }}
-            >
-              Pay Now
-            </Button>
           </div>
 
           <Modal show={show} onHide={handleClose}>
