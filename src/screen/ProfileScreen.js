@@ -75,7 +75,7 @@ export default function ProfileScreen() {
           </div>
           <div>
             <label className="fs-4">
-              Premium remains{" "}
+              Free Trial Remaining{" "}
               <span
                 style={{
                   fontWeight: "bolder",
