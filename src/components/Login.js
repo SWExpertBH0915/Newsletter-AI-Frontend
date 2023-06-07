@@ -7,6 +7,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
+import { ReactComponent as BugleIcaon } from "../img/icon_logo.svg";
+
 import { login } from "../actions/auth";
 
 const required = (value) => {
@@ -71,15 +73,18 @@ const Login = (props) => {
 
   return (
     <div className="col-md-12">
-      <div className="card card-container">
-        <img
+      <div className="card card-container rounded-4">
+        {/* <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
           className="profile-img-card"
-        />
+        /> */}
+        <div className="profile-img-card">
+          <BugleIcaon />
+        </div>
 
-        <Form onSubmit={handleLogin} ref={form}>
-          <div className="form-group">
+        <Form onSubmit={handleLogin} ref={form} className="text-white">
+          <div className="form-group mb-3">
             <label htmlFor="username">Username</label>
             <Input
               type="text"
@@ -91,7 +96,7 @@ const Login = (props) => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="password">Password</label>
             <Input
               type="password"

@@ -9,7 +9,9 @@ import { isEmail } from "validator";
 import { register } from "../actions/auth";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { ReactComponent as BugleIcaon } from "../img/icon_logo.svg";
 
 const required = (value) => {
   if (!value) {
@@ -120,24 +122,27 @@ const Register = () => {
 
   return (
     <div className="col-md-12">
-      <div className="card card-container">
+      <div className="card card-container text-white rounded-4">
         <label className="fs-3 fw-bolder text-center mb-2">
           Welcome to the Bugle AI Club!
         </label>
         <label className="fs-5 fw-semibold text-center mb-3">
           Thanks for joining us, please finish your account setup below
         </label>
-        <img
+        {/* <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
           className="profile-img-card"
-        />
+        /> */}
+        <div className="profile-img-card">
+          <BugleIcaon />
+        </div>
 
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
+              <div className="form-group mb-3">
+                <label htmlFor="username">Create a Username</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -148,8 +153,8 @@ const Register = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
+              <div className="form-group mb-3">
+                <label htmlFor="email">Confirm your Email</label>
                 <Input
                   type="email"
                   className="form-control"
@@ -160,8 +165,8 @@ const Register = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <div className="form-group mb-3">
+                <label htmlFor="password">Create a Password</label>
                 <Input
                   type="password"
                   className="form-control"
@@ -172,7 +177,7 @@ const Register = () => {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="confirmpassword">Confirm Password</label>
                 <Input
                   type="password"
@@ -195,7 +200,7 @@ const Register = () => {
                   Sign Up
                 </button>
                 <button
-                  className="btn btn-sm btn-white border-0 text-decoration-underline mt-4"
+                  className="btn btn-sm btn-white border-0 text-decoration-underline mt-4 text-white"
                   onClick={() => {
                     navigate("/login");
                   }}
