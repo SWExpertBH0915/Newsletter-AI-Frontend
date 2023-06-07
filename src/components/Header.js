@@ -58,7 +58,9 @@ export default function Header() {
           >
             WATCH DEMO
           </button>
-          {currentUser && currentUser.subscriptionStatus === "active" ? (
+          {currentUser &&
+          (currentUser.subscriptionStatus === "active" ||
+            currentUser.subscriptionStatus === "trialing") ? (
             <button
               className="header-btn btn btn-md btn-success rounded-5"
               style={{}}
@@ -66,7 +68,7 @@ export default function Header() {
                 navigate("/mainscreen");
               }}
             >
-              Create Newsletter
+              CREATE NEWSLETTER
             </button>
           ) : (
             <button

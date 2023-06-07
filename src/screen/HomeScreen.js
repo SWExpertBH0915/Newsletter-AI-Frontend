@@ -27,7 +27,9 @@ export default function HomeScreen() {
           </div>
           <div className="d-flex justify-content-center align-items-center w-100">
             <div>
-              {currentUser && currentUser.subscriptionStatus === "active" ? (
+              {currentUser &&
+              (currentUser.subscriptionStatus === "active" ||
+                currentUser.subscriptionStatus === "trialing") ? (
                 <button
                   className="btn btn-md btn-success rounded-5"
                   style={{}}
@@ -35,7 +37,7 @@ export default function HomeScreen() {
                     navigate("/mainscreen");
                   }}
                 >
-                  Create Newsletter
+                  CREATE NEWSLETTER
                 </button>
               ) : (
                 <button
@@ -105,7 +107,9 @@ export default function HomeScreen() {
           </span>
         </div>
       </div>
-      {currentUser && currentUser.subscriptionStatus === "active" ? (
+      {currentUser &&
+      (currentUser.subscriptionStatus === "active" ||
+        currentUser.subscriptionStatus === "trialing") ? (
         <div className="d-flex justify-content-center align-items-center mt-4">
           <button
             className="btn btn-md btn-success rounded-5"
@@ -114,7 +118,7 @@ export default function HomeScreen() {
               navigate("/mainscreen");
             }}
           >
-            Create Newsletter
+            CREATE NEWSLETTER
           </button>
         </div>
       ) : (

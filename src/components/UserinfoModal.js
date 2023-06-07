@@ -96,7 +96,9 @@ export default function UserinfoModal({ isOpen, onClose }) {
               </button>
             </div>
           </div>
-          {currentUser && currentUser.subscriptionStatus === "active" ? (
+          {currentUser &&
+          (currentUser.subscriptionStatus === "active" ||
+            currentUser.subscriptionStatus === "trialing") ? (
             <div className="d-flex flex-column justify-content-center align-items-center">
               <button
                 className="btn btn-md btn-success rounded-5"
@@ -105,7 +107,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
                   navigate("/mainscreen");
                 }}
               >
-                Create Newsletter
+                CREATE NEWSLETTER
               </button>
             </div>
           ) : (
