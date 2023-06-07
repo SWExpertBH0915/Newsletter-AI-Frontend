@@ -35,7 +35,7 @@ export default function HomeScreen() {
                     navigate("/mainscreen");
                   }}
                 >
-                  GET STARTED
+                  Create Newsletter
                 </button>
               ) : (
                 <button
@@ -114,7 +114,7 @@ export default function HomeScreen() {
               navigate("/mainscreen");
             }}
           >
-            GET STARTED
+            Create Newsletter
           </button>
         </div>
       ) : (

@@ -105,7 +105,7 @@ export default function UserinfoModal({ isOpen, onClose }) {
                   navigate("/mainscreen");
                 }}
               >
-                GET STARTED
+                Create Newsletter
               </button>
             </div>
           ) : (

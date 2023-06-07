@@ -66,7 +66,7 @@ export default function Header() {
                 navigate("/mainscreen");
               }}
             >
-              GET STARTED
+              Create Newsletter
             </button>
           ) : (
             <button
