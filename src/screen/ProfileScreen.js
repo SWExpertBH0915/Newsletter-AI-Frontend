@@ -119,7 +119,8 @@ export default function ProfileScreen() {
           <div className="mb-5">
             <label className="text-white">
               Payment process:{" "}
-              {currentUser.subscriptionStatus === "active" ? (
+              {currentUser.subscriptionStatus === "active" ||
+              currentUser.subscriptionStatus === "trialing" ? (
                 <div className="d-flex flex-column justify-content-center align-items-center">
                   <span className="mb-3 mt-1">Active</span>
                   <botton
