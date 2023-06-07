@@ -11,8 +11,8 @@ export default function Payment() {
   return (
     <div className="card card-container">
       <form className="form-group d-flex flex-column">
-        <label className="mb-4 fs-2 fw-bold text-center">
-          Payment confirmed
+        <label className="mb-4 fs-2 fw-bold text-center text-white">
+          Payment confirmed!
         </label>
         <button
           className="btn btn-success"
