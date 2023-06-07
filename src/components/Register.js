@@ -129,11 +129,6 @@ const Register = () => {
         <label className="fs-5 fw-semibold text-center mb-3">
           Thanks for joining us, please finish your account setup below
         </label>
-        {/* <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        /> */}
         <div className="profile-img-card">
           <BugleIcaon />
         </div>
