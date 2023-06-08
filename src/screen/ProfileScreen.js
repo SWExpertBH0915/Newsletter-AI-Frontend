@@ -30,30 +30,28 @@ export default function ProfileScreen() {
       .catch((error) => {
         alert(error.message);
       });
-    console.log(res.status);
     if (res.status === 201) {
-      console.log(res.status);
       const cancelstatus = res.data.result;
       alert(cancelstatus);
       // await axios.put(`${BASE_URL}/api/update/${currentUser.id}`, {
       //   subscriptionId: "",
       //   subscriptionStatus: ""
       // });
-
-      const newUser = await axios
-        .get(`${BASE_URL}/test/user/${currentUser.id}`, {
-          headers: {
-            "x-access-token": currentUser.accessToken
-          }
-        })
-        .then((res) => {
-          localStorage.setItem("user", JSON.stringify(res.data));
-        });
-
-      window.location.reload();
     } else {
       alert("Try again");
     }
+    const newUser = await axios
+      .get(`${BASE_URL}/test/user/${currentUser.id}`, {
+        headers: {
+          "x-access-token": currentUser.accessToken
+        }
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("user", JSON.stringify(res.data));
+      });
+    console.log(newUser);
+    window.location.reload();
   };
 
   if (!currentUser) {

@@ -14,7 +14,7 @@ export default function ContactUs() {
               <h1>Contact Us</h1>
             </div>
             <div>
-              <h4>Email: Phil@bugleai.com</h4>
+              <h4>Email: phil@robotpigeon.co</h4>
             </div>
             <div>
               <label className="fs-4">Bugle AI</label>

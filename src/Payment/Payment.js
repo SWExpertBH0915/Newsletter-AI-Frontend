@@ -1,10 +1,10 @@
 import "./Payment.css";
-import React, { useState, useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
+import React from "react";
+// import { loadStripe } from "@stripe/stripe-js";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+// const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 export default function Payment() {
   let navigate = useNavigate();

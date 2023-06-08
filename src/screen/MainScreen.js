@@ -16,11 +16,11 @@ import { useSelector } from "react-redux";
 
 const tones_temps = [
   "Serious",
-  "Humour",
+  "Sensational",
   "Education",
   "Authoritative",
   "Friendly",
-  "Sarastic",
+  "Sarcastic",
   "Calm",
   "Enthusiastic",
   "Formal",
@@ -30,11 +30,11 @@ const tones_temps = [
 ];
 const tones_contents = {
   Serious: ["Serious", "tones-index-1", "😶"],
-  Humour: ["Humour", "tones-index-2", "😄"],
+  Sensational: ["Sensational", "tones-index-2", "😄"],
   Education: ["Education", "tones-index-3", "🎓"],
   Authoritative: ["Authoritative", "tones-index-4", "👮‍♂️"],
   Friendly: ["Friendly", "tones-index-5", "🤗"],
-  Sarastic: ["Sarastic", "tones-index-6", "😒"],
+  Sarcastic: ["Sarcastic", "tones-index-6", "😒"],
   Calm: ["Calm", "tones-index-7", "😌"],
   Enthusiastic: ["Enthusiastic", "tones-index-8", "😃"],
   Formal: ["Formal", "tones-index-9", "😐"],
@@ -56,7 +56,7 @@ export default function MainScreen() {
   const [withemoji, setWithemoji] = useState(false);
   const [withimg, setWithimg] = useState(true);
 
-  const [resultEmoji, setResultEmoji] = useState("");
+  // const [resultEmoji, setResultEmoji] = useState("");
 
   const initailData = [
     {
@@ -89,7 +89,7 @@ export default function MainScreen() {
   };
 
   const handleOnClick = async () => {
-    setResultEmoji(tones_contents[tones][2]);
+    // setResultEmoji(tones_contents[tones][2]);
     setData([]);
     var urlCheck = [];
 
