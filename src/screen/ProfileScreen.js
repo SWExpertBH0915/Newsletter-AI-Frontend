@@ -3,55 +3,24 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/Header";
-import {
-  Button,
-  Modal,
-  ToggleButton,
-  ToggleButtonGroup
-} from "react-bootstrap";
-import { useState } from "react";
+import { Button, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASEURL;
 export default function ProfileScreen() {
   const { user: currentUser } = useSelector((state) => state.auth);
-  const [price, setPrice] = useState(30);
-
-  const handelOnChangeMonth = (val) => setPrice(val);
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
 
   const handleOnClick = async () => {
-    const res = await axios
-      .post(`${BASE_URL}/payment/cancel`, {
-        currentUser: currentUser
+    axios
+      .put(`${BASE_URL}/payment/cancel/${currentUser.id}`, {
+        SUBSCRIPTION_ID: currentUser.subscriptionId
+      })
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data));
+        window.location.reload();
       })
       .catch((error) => {
         alert(error.message);
       });
-    if (res.status === 201) {
-      const cancelstatus = res.data.result;
-      alert(cancelstatus);
-      // await axios.put(`${BASE_URL}/api/update/${currentUser.id}`, {
-      //   subscriptionId: "",
-      //   subscriptionStatus: ""
-      // });
-    } else {
-      alert("Try again");
-    }
-    const newUser = await axios
-      .get(`${BASE_URL}/test/user/${currentUser.id}`, {
-        headers: {
-          "x-access-token": currentUser.accessToken
-        }
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("user", JSON.stringify(res.data));
-      });
-    console.log(newUser);
-    window.location.reload();
   };
 
   if (!currentUser) {
@@ -92,8 +61,6 @@ export default function ProfileScreen() {
             type="radio"
             name="style-options"
             size="sm"
-            value={price}
-            onChange={handelOnChangeMonth}
             style={{ paddingLeft: "0px" }}
           >
             <ToggleButton
@@ -144,16 +111,6 @@ export default function ProfileScreen() {
               )}
             </label>
           </div>
-
-          <Modal show={show} onHide={handleClose}>
-            {/* <Modal.Body>
-            </Modal.Body> */}
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
         </div>
       </div>
     </div>

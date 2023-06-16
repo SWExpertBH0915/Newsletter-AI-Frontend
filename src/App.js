@@ -4,9 +4,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import MainScreen from "./screen/MainScreen";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearMessage } from "./actions/message";
-import { useState } from "react";
 import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileScreen from "./screen/ProfileScreen";
@@ -19,9 +18,9 @@ import Payment from "./Payment/Payment";
 // import StripePay from "./Payment/StripePay";
 
 function App() {
-  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  // const [showAdminBoard, setShowAdminBoard] = useState(false);
 
-  const { user: currentUser } = useSelector((state) => state.auth);
+  // const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   let location = useLocation();
@@ -32,17 +31,13 @@ function App() {
     }
   }, [dispatch, location]);
 
-  // const logOut = useCallback(() => {
-  //   dispatch(logout());
-  // }, [dispatch]);
-
-  useEffect(() => {
-    if (currentUser) {
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-    } else {
-      setShowAdminBoard(false);
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+  //   } else {
+  //     setShowAdminBoard(false);
+  //   }
+  // }, [currentUser]);
 
   const logOut = () => {
     dispatch(logout());
@@ -56,7 +51,6 @@ function App() {
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/payment" element={<Payment />} /> */}
         <Route path="/payment" element={<Payment />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/demo" element={<VideoPlayer />} />

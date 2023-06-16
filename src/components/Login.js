@@ -60,6 +60,9 @@ const Login = (props) => {
           window.location.reload();
         })
         .catch(() => {
+          if (message) {
+            alert(message);
+          }
           setLoading(false);
         });
     } else {
@@ -74,11 +77,6 @@ const Login = (props) => {
   return (
     <div className="col-md-12">
       <div className="card card-container rounded-4">
-        {/* <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        /> */}
         <div className="profile-img-card">
           <BugleIcaon />
         </div>
@@ -118,23 +116,15 @@ const Login = (props) => {
               )}
               <span>Login</span>
             </button>
-            {/* <button
-              className="btn btn-sm btn-white border-0 text-decoration-underline mt-4"
-              onClick={() => {
-                navigate("/register");
-              }}
-            >
-              Don't Have an account? Register here
-            </button> */}
           </div>
 
-          {message && (
+          {/* {message && (
             <div className="form-group">
               <div className="alert alert-danger" role="alert">
                 {message}
               </div>
             </div>
-          )}
+          )} */}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
